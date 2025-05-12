@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dynamic Iframe Overlay</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    crossorigin="anonymous">
+</head>
+<body class="bg-dark text-light">
+
+  <div class="p-2 d-flex justify-content-center align-items-center text-center flex-column" 
+       style="max-width: 600px; width: 90%;">
+
+    <!-- Link Above -->
+    <a class="nav-link text-light mb-2" href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-eye-fill"
+        viewBox="0 0 16 16">
+        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+      </svg>
+    </a>
+
+    <!-- Image + Iframe Wrapper -->
+    <div id="image-wrapper" class="position-relative w-100" style="aspect-ratio: 16 / 9;">
+      <img src="img/x.webp" class="w-100 h-100 object-fit-cover rounded" alt="">
+      <!-- Iframe will be inserted here -->
+    </div>
+
+  </div>
+
+
+  <script src="positionAbsolutIframe.js"></script>
+</body>
+</html>

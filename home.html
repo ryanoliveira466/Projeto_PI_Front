@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+</head>
+
+<body>
+
+  <h1>Welcome to Home Page</h1>
+
+  <div id="guest">
+    <p>You are not logged in.</p>
+    <a href="login.html">Login</a> |
+    <a href="register.html">Register</a> |
+  </div>
+
+  <div id="loggedIn" style="display:none;">
+    <p>Welcome back!</p>
+    <a href="profile.html">Go to Profile</a> |
+    <button id="logoutButton">Logout</button>
+  </div>
+
+  <p id="message"></p>
+
+
+  <input type="text" id="searchUsersInput" placeholder="Search users:">
+  <div id="users">
+  </div>
+
+
+
+  <script src="app.js" type="module"></script>
+  <script>
+(async function() {
+  const apiBase = 'http://127.0.0.1:8000';
+
+  async function checkAuth() {
+    try {
+      const res = await fetch(`${apiBase}/api/user/my`, {
+        credentials: 'include',
+        headers: { 'Accept': 'application/json', }
+      });
+      if (!res.ok) throw new Error('Not authenticated');
+      const { user } = await res.json();
+      return user;
+    } catch {
+      return null;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const user = await checkAuth();
+    const isLoggedIn = !!user;
+    console.log('isLoggedIn:', isLoggedIn);
+
+    document.getElementById('guest').style.display = isLoggedIn ? 'none': 'block';
+    document.getElementById('loggedIn').style.display = isLoggedIn ? 'block':'none';
+
+  });
+})();
+  </script>
+</body>
+
+</html>
