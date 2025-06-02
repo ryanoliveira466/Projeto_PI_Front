@@ -96,7 +96,8 @@
             padding: 0;
             border: 0;
             font-size: 100%;
-            font: inherit;
+            /* Markdown text
+            /* font: inherit; */
             vertical-align: baseline;
         }
 
@@ -119,10 +120,12 @@
             line-height: 1;
         }
 
-        ol,
+        /* Markdown list
+        
+        /* ol,
         ul {
             list-style: none;
-        }
+        } */
 
         blockquote,
         q {
@@ -175,14 +178,82 @@
             transition: all 1s ease-in-out;
         }
 
-        .card-effect {
-            transition: transform 1s ease-in-out, opacity 0.6s ease;
+        .transitionProjectLink {
+            transition: all 0.2s ease-in-out;
         }
 
         .vh-0 {
             height: 0vh !important;
         }
+
+        .projectLink:hover {
+            background-color: rgba(0, 0, 0, 0.295);
+        }
+
+        #inputSearchProjectsUser::placeholder {
+            color: #ffffff;
+            /* or any visible color like #888, gray, etc. */
+            opacity: 1;
+            /* make sure it's fully opaque */
+        }
+
+        /* Target elements with scrollbars (e.g. div, body, etc.) */
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 6px;
+            /* vertical scrollbar width */
+            height: 6px;
+            /* horizontal scrollbar height */
+            padding: 1rem;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.3);
+            /* scrollbar color */
+            border-radius: 3px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+            /* darker on hover */
+        }
+
+        /* Dark background for inline code */
+        code {
+            background-color: #111;
+            color: #eee;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        /* Dark background for block code */
+        pre code {
+            display: block;
+            background-color: #111;
+            color: #eee;
+            padding: 1em;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            white-space: pre;
+            font-family: 'Fira Code', monospace;
+        }
+
+        blockquote {
+            border-left: 4px solid #f8f8f8;
+            margin: 1em 0;
+            padding: 0.5em 1em;
+        }
+
+        .mix-dif {
+            mix-blend-mode: difference !important;
+        }
     </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 </head>
@@ -192,16 +263,22 @@
     <div id="userProfileMember"></div>
 
     <!-- //Projects -->
-    <div style="backdrop-filter: blur(10px);background-color: #08080830;"
-        class="position-fixed d-block transitionAll top-0 bottom-0 overflow-y-scroll vw-100 vh-0 z-1 justify-content-center text-center flex-column align-items-center"
-        id="projects">
+    <div class="position-fixed d-block transitionAll top-0 bottom-0 overflow-y-scroll vw-100 vh-0 z-1 justify-content-center text-center flex-column align-items-center"
+        id="projects" style="backdrop-filter: blur(10px); background-color: #1111112c;">
 
-        <button class="btn btn" id="closeProjects"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                fill="white" class="bi bi-x-lg" viewBox="0 0 16 16">
+        <button class="btn btn-danger m-1" id="closeProjects"><svg xmlns="http://www.w3.org/2000/svg" width="40"
+                height="40" fill="white" class="bi bi-x-lg" viewBox="0 0 16 16">
                 <path
                     d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
             </svg>
         </button>
+
+        <div class="d-flex w-100 p-3">
+            <input type="text" class="form-control text-light"
+                style="box-shadow: none; border: none !important; background-color: rgb(36, 37, 41);"
+                id="inputSearchProjectsUser" placeholder="Project names, tags..." aria-label="Username"
+                aria-describedby="basic-addon1">
+        </div>
 
         <div id="listProjects"
             class="w-100 d-flex flex-row flex-wrap overflow-y-auto justify-content-center align-items-center text-center">
@@ -233,9 +310,9 @@
                                     <path
                                         d="M6.854 4.646a.5.5 0 0 1 0 .708L4.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0m2.292 0a.5.5 0 0 0 0 .708L11.793 8l-2.647 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708 0" />
                                 </svg></a>
-                            <button class="navbar-toggler collapsed border-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                            <button class="navbar-toggler collapsed border-light" style="box-shadow: none !important;"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="navbar-collapse collapse" id="navbarColor01">
@@ -253,9 +330,6 @@
                                         <path
                                             d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
                                     </svg>
-                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-                                      </svg> -->
                                 </a>
                             </div>
                         </div>
@@ -266,7 +340,10 @@
                                 <p class="m-0 mix-dif" id="name"></p>
                             </a></h1>
                         <div class="img-thumbnail" style="width: 300px; height: 300px;">
-                            <img id="photo" src="" class="w-100 h-100 object-fit-cover" alt="" srcset="">
+                            <img id="photo" src="" class="w-100 h-100 object-fit-cover d-none" alt="" srcset="">
+                            <div class="placeholder-glow w-100 h-100 loading-placeholder">
+                                <span class="placeholder w-100 h-100"></span>
+                            </div>
                         </div>
 
                         <a class="nav-link text-light text-center" href="#">
@@ -286,6 +363,32 @@
     <script src="https://cdn.jsdelivr.net/npm/js-beautify@1.14.9/js/lib/beautify.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-beautify@1.14.9/js/lib/beautify-html.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-beautify@1.14.9/js/lib/beautify-css.js"></script>
+
+    <!-- Highlight.js Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+
+    <!-- Common Language Modules -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/ruby.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/rust.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/glsl.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/markdown.min.js"></script>
+
+    <!-- MarkDown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Sanitizer -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.3/dist/purify.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
