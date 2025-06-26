@@ -1,0 +1,252 @@
+Created table 'components_user' where users can post their content/related foreign key.
+Users can create content from their profile page.
+Users can see others users posts if they visit their member page.
+Created main page for a project.
+Foreing key and using query parameters for these.
+Created api routes for these.
+Created seeders for auto table fill when testing users an functions.
+ 
+
+
+
+AuthController:
+ public function postContent(Request $request)
+    {
+
+
+        //Trim is auto for email and name
+  
+        try {
+            $request->validate(
+                [
+                    'name' => 'required',
+                    'description' => 'required',
+                    'javascript' => 'required',
+                    'css' => 'required',
+                    'html' => 'required'
+                ],
+                [
+                    'name.required' => 'The name field is required',
+                    'description.required' => 'The description field is required',
+                    'javascript.required' => 'The javascript field is required',
+                    'css.required' => 'The css field is required',
+                    'html.required' => 'The html field is required'
+                ]
+            );
+
+            $user = $request->user();
+            $post = $user->posts()->create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'javascript' => $request->javascript,
+                'css' => $request->css,
+                'html' => $request->html,
+            ]);
+            
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Success while posting',
+                'post' => $post,
+            ], 201);
+        } catch (\Exception $error) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error while posting',
+                'error' => $error->getMessage(),
+            ], 500);
+        }
+    }
+
+
+
+
+
+
+
+**
+
+UserModel:
+public function posts()
+{
+    return $this->hasMany(Post::class); //THIS METHOD IS CALLED WHEN CREATING A POST USING USER FOREING KEY
+}
+
+PostModel:
+public function user()
+    {
+        return $this->belongsTo(User::class); //Foreign key
+    }
+
+**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PostModel:
+   protected static function booted()
+    {
+        static::creating(function ($user) {
+            do {
+                $slug = Str::slug($user->name) . '-' . Str::random(6);
+                $user->slug = $slug; 
+            } while (\App\Models\Post::where('slug', $slug)->exists());
+        });
+    
+        static::updating(function ($user) {
+            if ($user->isDirty('name')) {
+                do {
+                    $slug = Str::slug($user->name) . '-' . Str::random(6);
+                    $user->slug = $slug; 
+                } while (\App\Models\Post::where('slug', $slug)->exists());
+            }
+            
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PostsController:
+public function myProjects(Request $request)
+    {
+        try {
+            $user = $request->user();
+            $projects = Post::select('name', 'description', 'javascript', 'css', 'html', 'slug')->where('user_id', $user->id)->get();;
+            return response()->json([
+                'success' => true,
+                'message' => 'Posts from user profile listed successfully',
+                'projectsCount' => $projects->count(),
+                'projects' => $projects,
+                'userSlug' => $user->slug
+            ],200);
+        } catch (\Exception $error) {
+            return response()->json([
+                'success' => false,
+                'message' => "Failed to select posts of user profile",
+                'error' => $error->getMessage(),
+            ],500);
+        }
+    }
+
+
+
+    public function userProjects($slug)
+    {
+        try {
+            $user = User::select('id')->where('slug', $slug)->firstOrFail();;
+            $projects = Post::select('name', 'description', 'javascript', 'css', 'html', 'slug')->where('user_id', $user->id)->get();;
+            return response()->json([
+                'success' => true,
+                'message' => 'Posts from user listed successfully by slug',
+                'projectsCount' => $projects->count(),
+                'projects' => $projects
+            ],200);
+        } catch (\Exception $error) {
+            return response()->json([
+                'success' => false,
+                'message' => "Failed to select posts of user by slug",
+                'error' => $error->getMessage(),
+            ],500);
+        }
+    }
+
+
+
+    public function showBySlug($userSlug, $projectSLug)
+    {
+        try {
+            $user = User::select('id')->where('slug', $userSlug)->firstOrFail();;
+            $project = Post::select('name', 'description', 'javascript', 'css', 'html')->where('slug', $projectSLug)->where('user_id', $user->id)->firstOrFail();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post from user listed successfully by slug',
+                'projectCount' => $project->count(),
+                'project' => $project
+            ],200);
+        } catch (\Exception $error) {
+            return response()->json([
+                'success' => false,
+                'message' => "Failed to select post of user by slug",
+                'error' => $error->getMessage(),
+            ],500);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**
+UserSeeder:
+public function run(): void
+    {
+        User::factory()->count(10)->create();
+    }
+
+
+
+DatabaseSeeder:
+   public function run(): void
+    {
+
+        $this->call(UserSeeder::class);
+        // \App\Models\User::factory(10)->create();
+
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+    }
+
+**
+
+
+
+
+
+api:
+Route::get('/projects/user/{slug}', [PostController::class, 'userProjects']); //Projects of the user public on member page
+Route::get('/project/slug/{userSlug}/{projectSlug}', [PostController::class, 'showBySlug']); //Projects user public link for each
+
+api:Auth:Sanctum
+Route::post('/user/post-content', [AuthController::class, 'postContent']);
+Route::get('/user/myProjects', [PostController::class, 'myProjects']);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -96,7 +96,8 @@
             padding: 0;
             border: 0;
             font-size: 100%;
-            font: inherit;
+            /* Markdown text
+            /* font: inherit; */
             vertical-align: baseline;
         }
 
@@ -119,10 +120,12 @@
             line-height: 1;
         }
 
-        ol,
+        /* Markdown list
+        
+        /* ol,
         ul {
             list-style: none;
-        }
+        } */
 
         blockquote,
         q {
@@ -175,33 +178,231 @@
             transition: all 1s ease-in-out;
         }
 
-        .card-effect {
-            transition: transform 1s ease-in-out, opacity 0.6s ease;
+        .transitionProjectLink {
+            transition: all 0.2s ease-in-out;
         }
 
         .vh-0 {
             height: 0vh !important;
         }
+
+        .projectLink:hover {
+            background-color: rgba(0, 0, 0, 0.295);
+        }
+
+        /* Target elements with scrollbars (e.g. div, body, etc.) */
+        .scrollbar-thin-body::-webkit-scrollbar {
+            width: 6px;
+            /* vertical scrollbar width */
+            height: 6px;
+            /* horizontal scrollbar height */
+            padding: 1rem;
+        }
+
+        .scrollbar-thin-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scrollbar-thin-body::-webkit-scrollbar-thumb {
+            background-color: currentColor;
+            /* scrollbar color */
+            border-radius: 3px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background-color: currentColor
+                /* darker on hover */
+        }
+
+        /* Target elements with scrollbars (e.g. div, body, etc.) */
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 6px;
+            /* vertical scrollbar width */
+            height: 6px;
+            /* horizontal scrollbar height */
+            padding: 1rem;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background-color: rgba(209, 209, 209, 0.603);
+            /* scrollbar color */
+            border-radius: 3px;
+        }
+
+        .scrollbar-none::-webkit-scrollbar {
+            display: none;
+        }
+
+
+
+        /* Dark background for inline code */
+        code {
+            background-color: #111;
+            color: #eee;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        /* Dark background for block code */
+        pre code {
+            display: block;
+            background-color: #111;
+            color: #eee;
+            padding: 1em;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            white-space: pre;
+            font-family: 'Fira Code', monospace;
+        }
+
+        blockquote {
+            border-left: 4px solid #f8f8f8;
+            margin: 1em 0;
+            padding: 0.5em 1em;
+        }
+
+        .mix-dif {
+            mix-blend-mode: difference !important;
+        }
+
+        .img-user-layout-main {
+            width: 300px !important;
+            height: 300px !important;
+        }
+
+        .postBody {
+            height: auto;
+            max-width: 600px;
+        }
+
+        .cursor-pointer {
+            cursor: pointer !important;
+        }
+
+        .linkElement:hover {
+            background-color: rgba(0, 0, 0, 0.295);
+        }
+
+        .ws-pre-line {
+            white-space: pre-line;
+        }
+
+        .post {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            align-items: start;
+            z-index: 9999;
+            padding: 2rem;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .user-info-mdo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            max-width: 1200px;
+        }
+
+        .img-user-project-full-layout {
+            width: 145px !important;
+            height: 145px !important;
+        }
+
+        .post-body-content-mdo {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            max-width: 1200px;
+        }
+
+        .post-body-iframe-min-mdo {
+            flex: 1 1 500px;
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .post-body-md-mdo {
+            flex: 1 1 500px;
+            min-width: 300px;
+            background: transparent;
+            border-radius: 10px;
+            padding: 1rem;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .img-user-project-layout {
+            width: 65px !important;
+            height: 65px !important;
+        }
+
+        .cursor-default {
+            cursor: default !important;
+        }
+
     </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="bg-body scrollbar-thin-body">
 
+    <!-- Used on script -->
     <div id="userProfileMember"></div>
+    <p id="message" class="visually-hidden"></p>
+    <!-- Used on script -->
 
     <!-- //Projects -->
-    <div style="backdrop-filter: blur(10px);background-color: #08080830;"
-        class="position-fixed d-block transitionAll top-0 bottom-0 overflow-y-scroll vw-100 vh-0 z-1 justify-content-center text-center flex-column align-items-center"
+    <div class="position-fixed container-fluid overflow-y-auto d-block top-0 bottom-0 scrollbar-none vw-100 vh-0 z-1 justify-content-center text-center flex-column align-items-center bg-body"
         id="projects">
 
-        <button class="btn btn" id="closeProjects"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                fill="white" class="bi bi-x-lg" viewBox="0 0 16 16">
+        <button class="btn btn-danger m-1" id="closeProjects">
+            <svg xmlns="http://www.w3.org/2000/svg" local="https://icons.getbootstrap.com/icons/x-lg/" width="40"
+                height="40" fill="white" class="bi bi-x-lg" viewBox="0 0 16 16">
                 <path
                     d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
             </svg>
         </button>
+
+        <div class="d-flex flex-column w-100 p-3">
+            <div class="input-group">
+                <input type="text" id="searchProjectsInput" class="form-control" placeholder="Projects names, tags..." aria-label="Projects names, tags...">
+                <button class="btn btn-primary border" id="searchProjectsButton">
+                  <svg xmlns="http://www.w3.org/2000/svg" local="https://icons.getbootstrap.com/icons/search/" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                  </svg>
+                </button>
+              </div>
+                <!-- START: Tag Input Section -->
+          <div class="w-100 px-2 mt-3" id="tags">
+            <div class="input-group mb-2">
+              <input type="text" id="tagInput" class="form-control " placeholder="Type a tag">
+              <button class="btn btn-success border" id="addTagBtn">Add Tag</button>
+            </div>
+            <div id="tagsContainer" class="d-flex flex-wrap gap-2"></div>
+            <p class="visually-hidden" id="tagsProjectText"></p>
+          </div>
+          <!-- END: Tag Input Section -->
+                
+        </div>
 
         <div id="listProjects"
             class="w-100 d-flex flex-row flex-wrap overflow-y-auto justify-content-center align-items-center text-center">
@@ -209,33 +410,35 @@
 
     </div>
 
-    <header>
+    <header class="w-100 p-5 d-flex flex-row-reverse">
+        <a class="nav-link" id="darkLightMode" mode="light" href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                local="https://icons.getbootstrap.com/icons/brightness-high-fill/" width="16" height="16"
+                fill="currentColor" class="bi bi-sun-fill" viewBox="0 0 16 16">
+                <path
+                    d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708">
+                </path>
+            </svg>
+        </a>
     </header>
 
 
     <main>
-        <section>
+        <section class="w-100 h-100 d-flex justify-content-center align-items-center text-center flex-column bg-body">
             <article>
-                <div class="position-fixed top-0 bottom-0 overflow-auto vw-100 vh-100 z-0 justify-content-center flex-column align-items-center"
-                    style="display: flex;  ;background-color: rgb(0, 0, 0);" id="about">
-
-                    <div style="filter: blur(10px);" class="vh-100 vw-100 position-absolute top-0 start-0 z-n1">
-                        <img id="backgroundPhoto" src="" alt="" srcset="" class="object-fit-cover w-100 h-100">
-                    </div>
-
-                    <nav class="navbar mix-dif navbar-expand-lg bg-transparent border-bottom border-light"
-                        data-bs-theme="dark">
+                <div id="about">
+                    <nav class="navbar navbar-expand-lg bg-transparent border-bottom">
                         <div class="container-fluid">
                             <a class="navbar-brand" href="home.html"><svg xmlns="http://www.w3.org/2000/svg" width="30"
-                                    height="30" fill="currentColor" class="bi bi-code-square" viewBox="0 0 16 16">
+                                    height="30" local="https://icons.getbootstrap.com/icons/code-square/"
+                                    fill="currentColor" class="bi bi-code-square" viewBox="0 0 16 16">
                                     <path
                                         d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
                                     <path
                                         d="M6.854 4.646a.5.5 0 0 1 0 .708L4.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0m2.292 0a.5.5 0 0 0 0 .708L11.793 8l-2.647 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708 0" />
                                 </svg></a>
-                            <button class="navbar-toggler collapsed border-light" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                            <button class="navbar-toggler collapsed border" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false"
+                                aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="navbar-collapse collapse" id="navbarColor01">
@@ -248,29 +451,31 @@
                                     </li>
                                 </ul>
                                 <a class="nav-link" href="#" id="heartToggle">
-                                    <svg id="heartIcon" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                                        fill="white" class="bi bi-heart" viewBox="0 0 16 16">
+                                    <svg id="heartIcon" local="https://icons.getbootstrap.com/icons/heart/"
+                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                                        class="bi bi-heart" viewBox="0 0 16 16">
                                         <path
                                             d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
                                     </svg>
-                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-                                      </svg> -->
                                 </a>
                             </div>
                         </div>
                     </nav>
 
                     <div class="w-100 vh-50 d-flex align-items-center flex-column overflow-y-auto">
-                        <h1 class="text-light"><a class="nav-link text-light text-center" id="userLinkProfile" href="">
-                                <p class="m-0 mix-dif" id="name"></p>
-                            </a></h1>
-                        <div class="img-thumbnail" style="width: 300px; height: 300px;">
-                            <img id="photo" src="" class="w-100 h-100 object-fit-cover" alt="" srcset="">
+                        <h1>
+                            <a class="nav-link text-center" id="userLinkProfile" href="">
+                                <p class="m-0" id="name"></p>
+                            </a>
+                        </h1>
+                        <div class="img-user-layout-main">
+                            <img id="photo" src="img/default-user-A7fK9x.jpg" width="300px" height="300px"
+                                class="w-100 h-100 object-fit-cover d-none img-fluid border border-2 rounded-circle"
+                                alt="" srcset="">
                         </div>
 
-                        <a class="nav-link text-light text-center" href="#">
-                            <p class="m-0 mix-dif" id="email"></p>
+                        <a class="text-center m-0 fw-bold fs-6 text-decoration-none" href="#">
+                            <p id="email"></p>
                         </a>
                     </div>
 
@@ -286,6 +491,32 @@
     <script src="https://cdn.jsdelivr.net/npm/js-beautify@1.14.9/js/lib/beautify.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-beautify@1.14.9/js/lib/beautify-html.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-beautify@1.14.9/js/lib/beautify-css.js"></script>
+
+    <!-- Highlight.js Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+
+    <!-- Common Language Modules -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/ruby.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/rust.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/glsl.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/markdown.min.js"></script>
+
+    <!-- MarkDown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Sanitizer -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.3/dist/purify.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"

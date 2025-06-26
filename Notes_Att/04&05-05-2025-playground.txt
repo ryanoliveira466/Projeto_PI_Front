@@ -1,0 +1,21 @@
+  <!-- about -->
+    <div class="position-fixed top-0 bottom-0 overflow-auto vw-100 vh-100 z-2 justify-content-center flex-column align-items-center"
+        style="display: none; background: rgba(0, 0, 0, 0.97);" id="about">
+
+        <!-- image  -->
+        <div class="position-absolute top-0 bottom-0 vw-100 vh-100 z-n1" id="image"
+            style="display: none; filter: blur(10px);">
+            <img src="img/peep.webp" alt="" srcset="" class="w-100 h-100 object-fit-cover z-1">
+        </div>
+
+.
+         ... Content with mix blend mode with image behind
+        <!-- image  -->
+</div>
+
+
+
+
+
+<iframe id="live-preview" class="w-100 h-50 containter-fluid position-fixed start-0 top-50">
+ </iframe>

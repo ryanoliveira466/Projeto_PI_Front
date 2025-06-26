@@ -1,0 +1,41 @@
+06/05/2025
+
+Front end improvements project.html and edit.html
+
+Instead of storing a 64Archive with very long characters,Use Laravel Storage, create a photo and request this 
+photo from the server
+
+php artisan storage:link
+
+ if (preg_match('/^data:image\/(\w+);base64,/', $request->photo, $type)) {
+            // Delete old photo if exists
+            if ($request->user()->photo && Storage::disk('public')->exists($request->user()->photo)) {
+                Storage::disk('public')->delete($request->user()->photo);
+            }
+
+            // Decode and store new photo
+            $data = substr($request->photo, strpos($request->photo, ',') + 1);
+            $data = base64_decode($data);
+
+            $extension = strtolower($type[1]); // png, jpeg, etc.
+            $filename = uniqid() . '.' . $extension;
+            Storage::disk('public')->put("photos/{$filename}", $data);
+
+            // ⬅️ This line is critical: override photo with filename
+            $request->merge(['photo' => "photos/{$filename}"]);
+        }
+
+
+
+Front
+(your domain server)
+`http://127.0.0.1:8000/storage/${data.user.photo}`
+
+php
+css/html/js/beautify, Bootstrap, Laravel, CodeMirror
+
+
+UserModel and PostModel
+Changed slug to only numbers and slug only when creating a new instance so the URL link is the same
+even after user update his post or his profile (Myabe create a nickname for slug but numbers for now do the work)
+

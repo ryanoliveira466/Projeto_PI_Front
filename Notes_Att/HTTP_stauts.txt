@@ -1,0 +1,11 @@
+| **Code** | **Name**                  | **Meaning**                                                              |
+|----------|---------------------------|--------------------------------------------------------------------------|
+| 200      | OK                        | The request was successful.                                              |
+| 201      | Created                   | A new resource was successfully created (e.g., after a POST).            |
+| 204      | No Content                | The request was successful, but no content is returned.                  |
+| 400      | Bad Request               | The request is malformed or missing required parameters.                 |
+| 401      | Unauthorized              | Authentication failed or is missing.                                     |
+| 403      | Forbidden                 | Authenticated but not allowed to access the resource.                    |
+| 404      | Not Found                 | The requested resource doesn’t exist.                                    |
+| 422      | Unprocessable Entity      | Validation failed (Laravel uses this for form validation errors).        |
+| 500      | Internal Server Error     | Something went wrong on the server.                                      |
