@@ -5508,6 +5508,35 @@ div {
 
   }
 
+
+  //Fiz a estrutura base pra receber a data,
+  // e já deixei seguindo o padrão do resto do script (usar if() 
+  // pra checar se precisa carregar a parte do script)
+  //  Só precisa mexer na parte que faz carrega isso visualmente na página
+
+  //Lista quem o usuário ESTÁ SEGUINDO
+  if (document.getElementById("divTemporaria")) {
+  
+
+    const response = await fetch(`${apiUrl}/user/listFollowing`, {
+            credentials: 'include',        
+          });
+    const data = await response.json();
+    console.log(data);//Temp
+    
+}
+//Lista quem SEGUE o usuário
+if (document.getElementById("divTemporaria2")) {
+  
+
+    const response = await fetch(`${apiUrl}/user/listFollowers`, {
+            credentials: 'include',        
+          });
+    const data = await response.json();
+    console.log(data);//Temp
+    
+}
+
 });
 
 
@@ -5852,6 +5881,8 @@ document.getElementById('darkLightMode').addEventListener('click', function (e) 
     document.documentElement.setAttribute('data-bs-theme', 'light');
   }
 });
+
+
 
 
 
