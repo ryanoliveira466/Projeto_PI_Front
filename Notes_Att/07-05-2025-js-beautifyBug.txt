@@ -1,0 +1,40 @@
+07/05/2025
+
+Resolving front end details
+Project, edit and create done 
+
+Bug js-beautify with comment on JS script //
+
+function convertVisibleComments() {
+  const editor = window.jsEditor;
+  const code = editor.state.doc.toString();
+
+  //\n Separate considering TAB/lines
+  const updatedCode = code.split('\n').map(line => {
+
+    const trimmedLine = line.trimStart();
+
+    // Skip line if it already has a block comment
+    if (trimmedLine.includes('/*') && trimmedLine.includes('*/')) {
+      return line;
+    }
+
+    // Convert // comments at the end of a line
+    const commentIndex = line.indexOf('//');
+    if (commentIndex !== -1) {
+      const codePart = line.slice(0, commentIndex).trimEnd();
+      const commentPart = line.slice(commentIndex).trim();
+      return `${codePart} /*${commentPart}*/`;
+    }
+
+    return line;
+  }).join('\n');
+
+  editor.dispatch({
+    changes: {
+      from: 0,
+      to: editor.state.doc.length,
+      insert: updatedCode
+    }
+  });
+}

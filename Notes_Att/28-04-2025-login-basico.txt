@@ -1,0 +1,172 @@
+1 - php artisan make:controller AuthController
+2 - composer require laravel/sanctum
+3 - php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+
+
+
+
+
+
+
+AuthController:
+<?php
+
+namespace App\Http\Controllers;
+
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+
+class AuthController extends Controller
+{
+    public function login(Request $request)
+    {
+        // Validate inputs
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        // Find user
+        $user = User::where('email', $request->email)->first();
+
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'message' => 'Invalid login details.'
+            ], 401);
+        }
+
+        // Generate API token
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'user' => $user,
+        ]);
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ], 201);
+    }
+
+    public function updateUser(Request $request)
+    {
+        $user = $request->user();
+
+        $user->update($request->only('name', 'email'));
+
+        return response()->json(['message' => 'User updated', 'user' => $user]);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+User:Controller:
+
+...Pattern my creation of CRUD User...
+
+
+Get user with token:
+    public function my(Request $request)
+{
+    return response()->json([
+        'success' => true,
+        'user' => $request->user()
+    ]);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+api:
+// PROTECTED routes
+Route::middleware('auth:sanctum')->group(function () {
+
+    //Notice: GET /user/{user} will catch everything under /user/*.
+    //When you request /user/my, Laravel thinks "my" is a {user} parameter!
+    //It tries to find a User with ID = "my" — but "my" is not a number — so everything breaks!
+    //THAT'S why it only works when you remove Route::resource().
+
+    Route::get('/user/my', [UserController::class, 'my']);
+    Route::post('/user/update', [AuthController::class, 'updateUser']);
+    
+    
+});
+
+// PUBLIC routes
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+
+// TEST RESTFUL Commands
+Route::resource('/user', UserController::class);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kernel
+  'api' => [
+            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            'throttle:api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],

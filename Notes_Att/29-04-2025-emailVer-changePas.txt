@@ -1,0 +1,208 @@
+29/04/2025
+
+Implemented password changing:
+
+Yes — Laravel automatically compares new_password and new_password_confirmation only if:
+You use the confirmed rule in your controller validation.
+
+And the input names follow this pattern: field + _confirmation.
+
+
+
+If your frontend has:
+´´´
+const new_password = document.getElementById('new_password').value;
+const new_password_confirmation = document.getElementById('new_password_confirmation').value;
+´´´
+
+
+
+
+Then in your HTML form, your fields must be named:
+<input type="password" name="new_password" id="new_password">
+<input type="password" name="new_password_confirmation" id="new_password_confirmation">
+
+
+
+
+
+
+
+And in your Laravel controller, your validation must look like this:
+$request->validate([
+    'new_password' => 'required|min:6|confirmed',
+]);
+Laravel will then look for a matching new_password_confirmation and ensure both are the same. 
+You don't need to manually compare them.
+
+
+
+
+
+AuthController:
+    public function changePassword(Request $request)
+{
+    $request->validate([
+        'current_password' => ['required'],
+        'new_password' => ['required', 'confirmed'],
+    ]);
+
+    $user = $request->user();
+
+    if (!Hash::check($request->current_password, $user->password)) {
+        return response()->json([
+            'success' => false,
+            'message' => 'The current password is incorrect.'
+        ]);
+    }
+
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Password changed successfully.'
+    ]);
+}
+
+
+
+
+
+
+
+api:
+Inside middleware sanctum group
+Route::post('/user/change-password', [AuthController::class, 'changePassword']);
+
+
+
+
+
+
+///////////////////////
+
+Email confirmation configuration
+
+
+Mailtrap
+
+///////////////////////
+CANT DELETE USER FROM MYSQLWORKBENCH MANUALLY
+I WAS TRIYING TO TEST Mailttrap but i was registering an user already with an email on database and it didnt worked
+I was having this issue because for some reason MySQL - WorkBench was not deleting the user even thought i was cliking in deleting
+
+
+
+
+env.
+Mailtrap access:
+MAIL_MAILER=smtp
+MAIL_HOST=mailpit
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+
+
+
+
+Class user:
+class User extends Authenticatable implements MustVerifyEmail
+
+
+
+
+
+AuthController:
+
+ public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $user->sendEmailVerificationNotification();
+
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ], 201);
+    }
+
+
+
+
+public function updateUser(Request $request)
+    {
+        $user = $request->user();
+
+         $request->validate([
+        'name' => 'required|string',
+        'email' => 'required|email|unique:users,email,' . $user->id,
+         ]);
+
+        // If the email is being changed, reset verification
+        if ($user->email !== $request->email) {
+        $user->email = $request->email;
+        $user->email_verified_at = null;
+        $user->save();
+        $user->sendEmailVerificationNotification();
+        }
+
+        $user->update($request->only('name', 'email'));
+
+        return response()->json(['message' => 'User updated', 'user' => $user]);
+    }
+
+
+
+
+
+
+
+api:
+// EMAIL
+Route::get('/email/verify/{id}/{hash}', function ($id, $hash) {
+    $user = User::findOrFail($id);
+
+    if (! hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
+        abort(403, 'Invalid verification link.');
+    }
+
+    if (! $user->hasVerifiedEmail()) {
+        $user->markEmailAsVerified();
+        event(new Verified($user));
+    }
+
+    return redirect('http://127.0.0.1:5501/home.html'); // Redirect to your frontend
+})->middleware('signed')->name('verification.verify');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
