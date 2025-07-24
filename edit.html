@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -96,7 +96,8 @@
             padding: 0;
             border: 0;
             font-size: 100%;
-            font: inherit;
+            /* Markdown text
+            /* font: inherit; */
             vertical-align: baseline;
         }
 
@@ -119,10 +120,12 @@
             line-height: 1;
         }
 
-        ol,
+        /*Markdown list
+
+        /* ol,
         ul {
             list-style: none;
-        }
+        } */
 
         blockquote,
         q {
@@ -147,7 +150,6 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth;
         }
 
         body {
@@ -156,386 +158,1259 @@
             height: 100vh;
         }
 
-        header,
-        footer {
-            width: 100%;
-            /* height: 100px; */
-            flex-shrink: 0;
-        }
-
         main {
             flex-grow: 1;
         }
 
         /* Customization */
-        .square,
-        .line {
-            position: absolute;
-            opacity: 0.2;
-        }
-
-        .square {
-            width: 30px;
-            height: 30px;
-            top: 110vh;
-            background-color: #00f;
-            animation: floatSquare 10s infinite linear;
-        }
-
-        .line {
-            width: 2px;
-            height: 100px;
-            top: -110px;
-            background-color: #f00;
-            animation: moveLine 8s infinite linear;
-        }
-
-        @keyframes floatSquare {
-            0% {
-                transform: translateY(120vh) rotate(0deg);
-            }
-
-            100% {
-                transform: translateY(-120vh) rotate(360deg);
-            }
-        }
-
-        @keyframes moveLine {
-            0% {
-                transform: translateY(-120px);
-            }
-
-            100% {
-                transform: translateY(120vh);
-            }
-        }
-
-        @media only screen and (max-width: 700px) {
-            .editor {
-                font-size: xx-small;
-            }
-        }
-
         .transitionAll {
-            transition: all 1s ease-in-out;
+            transition: all 1s ease-in-out, color 0s, background-color 0s;
+        }
+
+        .transitionNone {
+            transition: none !important;
+        }
+
+        #markdown-preview blockquote {
+            border-left: 4px solid currentColor;
+            margin: 1em 0;
+            padding: 0.5em 1em;
+        }
+
+        /* Target elements with scrollbars (e.g. div, body, etc.) */
+        .scrollbar-thin-body::-webkit-scrollbar {
+            width: 6px;
+            /* vertical scrollbar width */
+            height: 6px;
+            /* horizontal scrollbar height */
+            padding: 1rem;
+        }
+
+        .scrollbar-thin-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scrollbar-thin-body::-webkit-scrollbar-thumb {
+            background-color: currentColor;
+            /* scrollbar color */
+            border-radius: 3px;
         }
 
 
-        #projectName:empty:before {
-            content: attr(data-placeholder);
-            color: #aaa;
+
+
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background-color: currentColor
+                /* darker on hover */
         }
 
-        .pt-60 {
-            padding-top: 60px !important;
+        /* Target elements with scrollbars (e.g. div, body, etc.) */
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 6px;
+            /* vertical scrollbar width */
+            height: 6px;
+            /* horizontal scrollbar height */
+            padding: 1rem;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background-color: rgba(209, 209, 209, 0.603);
+            /* scrollbar color */
+            border-radius: 3px;
+        }
+
+
+
+
+        .scrollbar-thin-editor::-webkit-scrollbar-thumb:hover {
+            background-color: white
+                /* darker on hover */
+        }
+
+        /* Target elements with scrollbars (e.g. div, body, etc.) */
+        .scrollbar-thin-editor::-webkit-scrollbar {
+            width: 6px;
+            /* vertical scrollbar width */
+            height: 6px;
+            /* horizontal scrollbar height */
+            padding: 1rem;
+        }
+
+        .scrollbar-thin-editor::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scrollbar-thin-editor::-webkit-scrollbar-thumb {
+            background-color: rgba(209, 209, 209, 0.603);
+            /* scrollbar color */
+            border-radius: 3px;
+        }
+
+
+
+
+        .scrollbar-none::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cm-scroller::-webkit-scrollbar {
+            display: none !important;
+        }
+
+        .editor-row-container {
+            display: flex;
+            height: 100%;
+            /* flex-wrap: wrap; */
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .editor-row-container section {
+            /* flex: 1 1 calc(33.33% - 1rem); */
+            flex-basis: calc(100% - 1rem) !important;
+            min-width: 50px;
+            display: flex;
+            flex-direction: column;
+            max-height: 100%;
+        }
+
+        .editor {
+
+            font-family: monospace;
+            font-size: medium;
+            min-height: 200px;
+            height: 100%;
+        }
+
+        .vh-50 {
+            height: 50vh !important;
+        }
+
+        .content-of-editor-min {
+            cursor: pointer;
+        }
+
+        .content-of-editor {
+            height: 100%;
+        }
+
+
+        @media only screen and (max-width: 800px) {
+            .editor-row-container {
+                flex-wrap: wrap;
+            }
+
+            #changeSections {
+                display: block !important;
+            }
+
+            #toggleLayout {
+                display: none !important;
+            }
+
+            .slider-width {
+                display: none;
+            }
+
+            .optionsWidthCopy img,
+            .optionsWidthCopy svg.bi-arrows-expand-vertical {
+                display: none;
+            }
+
+        }
+
+        .img-user-about {
+            width: 300px !important;
+            height: 300px !important;
+        }
+
+        .container-links-options {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 9999;
+            padding: 2rem;
+            overflow-y: auto;
+            box-sizing: border-box;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .md-create {
+            max-width: 600px;
+        }
+
+        .resize-none {
+            resize: none !important;
+        }
+
+        .outline-one {
+            outline: none !important;
+        }
+
+        .border-none {
+            border: none !important;
+        }
+
+        .project-description-write {
+            max-width: 800px;
+            max-height: 200px;
+        }
+
+        .project-description-overview {
+            max-width: 800px;
+            max-height: 500px;
+        }
+
+        .border-transparent {
+            border: solid transparent;
+        }
+
+        .photo-options-div {
+            max-width: 600px;
+        }
+
+        .photo-container {
+            max-width: 600px;
+        }
+
+        .editors-previews-container {
+            /* margin-top: 60px; */
+            min-height: 15vh;
+            height: 50vh;
+        }
+
+        .editors-preview-inner-wrapper {
+            min-height: 15vh;
+        }
+
+        .d-none-not-imp {
+            display: none;
+        }
+
+        .cursor-pointer {
+            cursor: pointer !important;
+        }
+
+        .config-container {
+            max-width: 600px;
+        }
+
+
+        .input-mw-600 {
+            max-width: 600px;
+        }
+
+        .bf-blur {
+            backdrop-filter: blur(10px);
+        }
+
+        input[type="range"] {
+            accent-color: #0d6efd;
+            background: transparent;
+            /* Your custom accent color */
+        }
+
+        /* WebKit Browsers (Chrome, Edge, Safari) */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            border-radius: 50%;
+            /* Make it circular */
+            background: #0d6efd;
+            cursor: pointer;
+            margin-top: -5px;
+            /* Align thumb with the track */
+        }
+
+        /* Firefox */
+        input[type="range"]::-moz-range-thumb {
+            border-radius: 50%;
+            background: #0d6efd;
+            cursor: pointer;
+        }
+
+
+        /* Track: webkit browsers */
+        input[type="range"]::-webkit-slider-runnable-track {
+            height: 5px;
+            background: #ccc;
+            border-radius: 16px;
+        }
+
+        /* Track: Mozilla Firefox */
+        input[type="range"]::-moz-range-track {
+            height: 5px;
+            background: #ccc;
+            border-radius: 5px;
+        }
+
+        /* Verical alignment */
+        input[type=range][orient=vertical] {
+            writing-mode: vertical-lr;
+            direction: rtl;
+            appearance: slider-vertical;
+            vertical-align: bottom;
+        }
+
+        input[type=range][orient=vertical]::-webkit-slider-thumb {
+            appearance: none;
+            -webkit-appearance: none;
+            border-radius: 50%;
+            /* Make it circular */
+            background: #0d6efd;
+            cursor: pointer;
+            margin-left: -5px;
+            /* Align thumb with the track */
+        }
+
+        input[type=range][orient=vertical]::-webkit-slider-runnable-track {
+            background: #ccc;
+            width: 5px;
+            border-radius: 3px;
+        }
+
+
+        .inputs-helpers-container {
+            height: 85px;
+        }
+
+        code {
+            border-radius: 6px;
+        }
+
+        .padding-sidebar {
+            padding-left: 4.5rem;
+        }
+
+        .width-sidebar {
+            width: 4.5rem !important;
+        }
+
+        .vw-0 {
+            width: 0vw !important;
+        }
+
+        .shadow-strong {
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
         }
     </style>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 </head>
 
 <body>
 
-
+    <!-- Used in script -->
     <div id="edit"></div>
-
     <form id="editForm" style="display: flex; flex-direction: column;" class="visually-hidden">
-        <input type="text" id="projectNameForm" placeholder="Name:" required>
-        <input type="text" id="projectDescriptionForm" placeholder="Description:" required>
-        <input type="text" id="javascriptForm" placeholder="Javascript:" required>
-        <input type="text" id="cssForm" placeholder="CSS:" required>
-        <input type="text" id="htmlForm" placeholder="HTML:" required>
+        <input type="text" id="projectNameForm" placeholder="Name:">
+        <input type="text" id="projectDescriptionForm" placeholder="Description:">
+        <input type="text" id="javascriptForm" placeholder="Javascript:">
+        <input type="text" id="cssForm" placeholder="CSS:">
+        <input type="text" id="htmlForm" placeholder="HTML:">
         <input type="text" id="photoForm" placeholder="Photo:">
+        <input type="text" id="tagsForm" placeholder="Tags:">
         <button type="submit" id="submitForm">Save edit</button>
     </form>
+    <!-- Used in script -->
 
-
-    <!-- background -->
-    <div class="position-fixed top-0 start-0 z-n1 w-100 h-100">
-        <div class="square" style="left: 10%; animation-delay: 0s;"></div>
-        <div class="square" style="left: 30%; animation-delay: 2s;"></div>
-        <div class="square" style="left: 50%; animation-delay: 4s;"></div>
-        <div class="line" style="left: 20%; animation-delay: 0s;"></div>
-        <div class="line" style="left: 40%; animation-delay: 1.5s;"></div>
-        <div class="line" style="left: 70%; animation-delay: 3s;"></div>
-        <div class="square" style="left: 90%; animation-delay: 5s;"></div>
-    </div>
 
     <!-- about -->
-    <div class="position-fixed transitionAll top-0 bottom-0 overflow-auto vw-100 vh-100 z-2 justify-content-center flex-column align-items-center"
-        style="display: flex;pointer-events: none; backdrop-filter: blur(10px); opacity: 0; background-color: rgba(0, 0, 0, 0.5);"
-        id="about">
-
-        <div class="w-100 vh-50 d-flex align-items-center flex-column overflow-y-auto">
-            <h1 class="text-light">Author</h1>
-            <div class="img-thumbnail" style="width: 300px; height: 300px;">
-                <img src="" id="imageProfile" class="w-100 h-100 object-fit-cover" alt="" srcset="">
+    <div class="container-links-options bg-body-secondary scrollbar-thin" id="about">
+        <div class="d-flex align-items-center flex-column overflow-y-auto mb-auto mt-auto bg-transparent rounded p-1">
+            <div class="img-fluid img-user-about">
+                <img src="" id="imageProfile" class="border border-2 rounded-pill object-fit-cover w-100 h-100 d-none"
+                    alt="" srcset="">
             </div>
-
-            <a class="nav-link text-light text-center" id="userLinkProfile" href="">
+            <a class="m-0 fw-bold fs-6 text-decoration-none" id="userLinkProfile" href="">
                 <p id="nameUserProfile"></p>
             </a>
-
-
-            <button class="btn btn" id="closeAbout"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                    fill="white" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <button class="btn btn-danger m-1" id="closeAbout"><svg xmlns="http://www.w3.org/2000/svg"
+                    local="https://icons.getbootstrap.com/icons/x-lg/" width="40" height="40" fill="white"
+                    class="bi bi-x-lg" viewBox="0 0 16 16">
                     <path
                         d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-                </svg></button>
+                </svg>
+            </button>
         </div>
-
-
     </div>
 
     <!-- description -->
-    <div class="position-fixed transitionAll top-0 bottom-0 overflow-auto vw-100 vh-100 z-2 justify-content-center flex-column align-items-center"
-        style="display: flex;pointer-events: none; backdrop-filter: blur(10px); opacity: 0; background-color: rgba(0, 0, 0, 0.5);"
-        id="description">
-
-        <div class="w-100 vh-50 d-flex align-items-center flex-column overflow-y-auto">
-            <div style="background: white; margin:0.5rem; padding: 2rem; border-radius: 12px; max-width: 600px; width: 90%; box-shadow: 0 10px 25px rgba(0,0,0,0.3); animation: fadeInUp 0.5s ease-out;"
-                class="text-center">
-                <textarea id="projectName" rows="1" placeholder="Enter project name" style="
-            width: 100%;
-            font-size: 2em;
-            font-weight: bold;
-            border: none;
-            outline: none;
-            resize: none;
-            color: #333;
-            margin-bottom: 1rem;
-            overflow-y: auto;
-            background: transparent;
-          "></textarea>
-
-                <textarea id="projectDescription" rows="6" placeholder="Write your project description..."
-                    style="width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; resize: none; max-height: 200px;">
-            </textarea>
-            </div>
-
-            <button class="btn btn" id="closeDescription"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                    fill="white" class="bi bi-x-lg" viewBox="0 0 16 16">
+    <div class="container-links-options bg-body-secondary scrollbar-thin" id="description">
+        <div
+            class="mb-auto mt-auto w-100 d-flex flex-column gap-4 flex-wrap align-items-center bg-transparent rounded p-1">
+            <button class="btn btn-danger m-1" id="closeDescription">
+                <svg xmlns="http://www.w3.org/2000/svg" local="https://icons.getbootstrap.com/icons/x-lg/" width="40"
+                    height="40" fill="white" class="bi bi-x-lg" viewBox="0 0 16 16">
                     <path
                         d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-                </svg></button>
+                </svg>
+            </button>
+
+            <div id="markdown-create">
+                <div class="text-center bg-body p-4 m-2 rounded md-create shadow-lg">
+                    <textarea id="projectName" rows="1" placeholder="Enter project name"
+                        class="w-100 fs-1 fw-bold border-none resize-none outline-one mb-3 overflow-y-auto bg-transparent scrollbar-thin"></textarea>
+                    <div class="d-flex flex-wrap gap-2 mb-2">
+                        <button class="p-2 rounded cursor-pointer fs-6 btn btn-primary" onclick="insert('# ', '')">🔠
+                            <span>H1</span></button>
+                        <button class="p-2 rounded cursor-pointer fs-6 btn btn-primary" onclick="insert('## ', '')">🔡
+                            <span>H2</span></button>
+                        <button class="p-2 rounded cursor-pointer fs-6 btn btn-primary"
+                            onclick="insert('###### ', '')">🔤
+                            <span>H6</span></button>
+
+                        <button class="p-2 rounded cursor-pointer fs-6 btn btn-primary" onclick="insert('*', '*')">𝘪
+                            <span>Italic</span></button>
+                        <button class="p-2 rounded cursor-pointer fs-6 btn btn-primary" onclick="insert('**', '**')">𝐁
+                            <span>Bold</span></button>
+                        <button class="p-2 rounded cursor-pointer fs-6 btn btn-primary" onclick="insert('`', '`')">💻
+                            <span>Inline
+                                Code</span></button>
+                        <button class="p-2 rounded cursor-pointer fs-6 btn btn-primary" onclick="insertBlockCode()">📄
+                            <span>Code
+                                Block</span></button>
+
+                        <button class="p-2 rounded cursor-pointer fs-6 btn btn-primary" onclick="insert('- ', '')">📝
+                            <span>List</span></button>
+                        <button class="p-2 rounded cursor-pointer fs-6 btn btn-primary" onclick="insertImageTag()">🖼️
+                            <span>Image</span></button>
+                        <button class="p-2 rounded cursor-pointer fs-6 btn btn-primary"
+                            onclick="insert('[Link Text](', ')')">🔗
+                            <span>Link</span></button>
+                        <button class="p-2 rounded cursor-pointer fs-6 btn btn-primary" onclick="insert('> ', '')">💬
+                            <span>Quote</span></button>
+                        <button class="p-2 rounded cursor-pointer fs-6 btn btn-primary" onclick="insertTable()">📊
+                            <span>Table</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="projectDescription"
+                class="scrollbar-none project-description-write bg-dark text-light border-transparent w-100 rounded overflow-scroll text-start">
+            </div>
+
+            <div
+                class="scrollbar-none border-transparent project-description-overview bg-body shadow-lg p-4 rounded w-100 overflow-y-auto text-break fs-6">
+                <div id="markdown-preview" class="scrollbar-thin">
+                </div>
+            </div>
         </div>
-
-
     </div>
 
     <!-- photo -->
-    <div class="position-fixed transitionAll top-0 bottom-0 overflow-auto vw-100 vh-100 z-2 justify-content-center flex-column align-items-center"
-        style="display: flex;pointer-events: none; backdrop-filter: blur(10px); opacity: 0; background-color: rgba(0, 0, 0, 0.5);"
-        id="photo">
-
-        <div class="w-100 vh-50 d-flex align-items-center flex-column overflow-y-auto">
-            <h1 class="text-light">Thumbnail</h1>
-            <div id="imagePreview" style="height: auto; max-width: 600px; width: 90%;"
-                class="d-flex justify-content-center align-items-center text-center">
-                <img src="" id="cover" class="object-fit-cover w-100 h-100 rounded" alt="" srcset="">
+    <div class="container-links-options bg-body-secondary scrollbar-thin" id="photo">
+        <div class="w-100 bg-transparent rounded p-1 d-flex align-items-center flex-column mb-auto mt-auto">
+            <div class="w-100 photo-options-div">
+                <button class="btn btn-danger m-1" id="closePhoto"><svg xmlns="http://www.w3.org/2000/svg" width="40"
+                        height="40" fill="white" local="https://icons.getbootstrap.com/icons/x-lg/" class="bi bi-x-lg"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                    </svg>
+                </button>
             </div>
 
-            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
-
-            <label for="fileInput" style="margin: 0.5rem;
-              display: inline-block; 
-              padding: 10px 20px; 
-              background: #007bff; 
-              color: #fff; 
-              cursor: pointer; 
-              border-radius: 5px;
-            ">
-                Choose an image
-            </label>
-
-            <button class="btn btn" id="closePhoto"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                    fill="white" class="bi bi-x-lg" viewBox="0 0 16 16">
-                    <path
-                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-                </svg></button>
-
+            <div id="imagePreview"
+                class="d-flex justify-content-center rounded align-items-center text-center h-auto m-2 photo-container shadow-lg">
+                <img src="img/default-cover-A7fK9x.jpg" id="cover" class="object-fit-cover w-100 h-100 rounded" alt=""
+                    srcset="">
+            </div>
+            <div class="input-mw-600">
+                <label for="fileInput" class="form-label"></label>
+                <input class="form-control " type="file" id="fileInput" accept="image/*" />
+            </div>
         </div>
-
-
     </div>
 
-
-
-
-    <header class="position-fixed top-0 start-0 w-100 z-1">
-        <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="home.html"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                        fill="currentColor" class="bi bi-code-square" viewBox="0 0 16 16">
+    <!-- config -->
+    <div class="container-links-options bg-body-secondary scrollbar-thin" id="config">
+        <div class="w-100 d-flex align-items-center flex-column mb-auto mt-auto bg-transparent rounded p-1">
+            <div class="w-100 config-container">
+                <button class="btn btn-danger" id="closeConfig">
+                    <svg xmlns="http://www.w3.org/2000/svg" local="https://icons.getbootstrap.com/icons/x-lg/"
+                        width="40" height="40" fill="white" class="bi bi-x-lg" viewBox="0 0 16 16">
                         <path
-                            d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
-                        <path
-                            d="M6.854 4.646a.5.5 0 0 1 0 .708L4.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0m2.292 0a.5.5 0 0 0 0 .708L11.793 8l-2.647 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708 0" />
-                    </svg></a>
-                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z">
+                        </path>
+                    </svg>
                 </button>
-                <div class="navbar-collapse collapse" id="navbarColor01">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#javascript"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="goldenrod"
-                                    class="bi bi-filetype-js" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M14 4.5V14a2 2 0 0 1-2 2H8v-1h4a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM3.186 15.29a1.2 1.2 0 0 1-.111-.449h.765a.58.58 0 0 0 .255.384q.105.073.249.114.143.041.319.041.246 0 .413-.07a.56.56 0 0 0 .255-.193.5.5 0 0 0 .085-.29.39.39 0 0 0-.153-.326q-.151-.12-.462-.193l-.619-.143a1.7 1.7 0 0 1-.539-.214 1 1 0 0 1-.351-.367 1.1 1.1 0 0 1-.123-.524q0-.366.19-.639.19-.272.528-.422.336-.15.776-.149.457 0 .78.152.324.153.5.41.18.255.2.566h-.75a.56.56 0 0 0-.12-.258.6.6 0 0 0-.247-.181.9.9 0 0 0-.369-.068q-.325 0-.513.152a.47.47 0 0 0-.184.384q0 .18.143.3a1 1 0 0 0 .405.175l.62.143q.327.075.566.211.24.136.375.358t.135.56q0 .37-.188.656a1.2 1.2 0 0 1-.539.439q-.351.158-.858.158-.381 0-.665-.09a1.4 1.4 0 0 1-.478-.252 1.1 1.1 0 0 1-.29-.375m-3.104-.033A1.3 1.3 0 0 1 0 14.791h.765a.6.6 0 0 0 .073.27.5.5 0 0 0 .454.246q.285 0 .422-.164.138-.165.138-.466v-2.745h.79v2.725q0 .66-.357 1.005-.354.345-.984.345a1.6 1.6 0 0 1-.569-.094 1.15 1.15 0 0 1-.407-.266 1.1 1.1 0 0 1-.243-.39" />
-                                </svg></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#css"> <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                    height="20" fill="cyan" class="bi bi-filetype-css" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM3.397 14.841a1.13 1.13 0 0 0 .401.823q.195.162.478.252.284.091.665.091.507 0 .859-.158.354-.158.539-.44.187-.284.187-.656 0-.336-.134-.56a1 1 0 0 0-.375-.357 2 2 0 0 0-.566-.21l-.621-.144a1 1 0 0 1-.404-.176.37.37 0 0 1-.144-.299q0-.234.185-.384.188-.152.512-.152.214 0 .37.068a.6.6 0 0 1 .246.181.56.56 0 0 1 .12.258h.75a1.1 1.1 0 0 0-.2-.566 1.2 1.2 0 0 0-.5-.41 1.8 1.8 0 0 0-.78-.152q-.439 0-.776.15-.337.149-.527.421-.19.273-.19.639 0 .302.122.524.124.223.352.367.228.143.539.213l.618.144q.31.073.463.193a.39.39 0 0 1 .152.326.5.5 0 0 1-.085.29.56.56 0 0 1-.255.193q-.167.07-.413.07-.175 0-.32-.04a.8.8 0 0 1-.248-.115.58.58 0 0 1-.255-.384zM.806 13.693q0-.373.102-.633a.87.87 0 0 1 .302-.399.8.8 0 0 1 .475-.137q.225 0 .398.097a.7.7 0 0 1 .272.26.85.85 0 0 1 .12.381h.765v-.072a1.33 1.33 0 0 0-.466-.964 1.4 1.4 0 0 0-.489-.272 1.8 1.8 0 0 0-.606-.097q-.534 0-.911.223-.375.222-.572.632-.195.41-.196.979v.498q0 .568.193.976.197.407.572.626.375.217.914.217.439 0 .785-.164t.55-.454a1.27 1.27 0 0 0 .226-.674v-.076h-.764a.8.8 0 0 1-.118.363.7.7 0 0 1-.272.25.9.9 0 0 1-.401.087.85.85 0 0 1-.478-.132.83.83 0 0 1-.299-.392 1.7 1.7 0 0 1-.102-.627zM6.78 15.29a1.2 1.2 0 0 1-.111-.449h.764a.58.58 0 0 0 .255.384q.106.073.25.114.142.041.319.041.245 0 .413-.07a.56.56 0 0 0 .255-.193.5.5 0 0 0 .085-.29.39.39 0 0 0-.153-.326q-.152-.12-.463-.193l-.618-.143a1.7 1.7 0 0 1-.539-.214 1 1 0 0 1-.351-.367 1.1 1.1 0 0 1-.123-.524q0-.366.19-.639.19-.272.527-.422t.777-.149q.456 0 .779.152.326.153.5.41.18.255.2.566h-.75a.56.56 0 0 0-.12-.258.6.6 0 0 0-.246-.181.9.9 0 0 0-.37-.068q-.324 0-.512.152a.47.47 0 0 0-.184.384q0 .18.143.3a1 1 0 0 0 .404.175l.621.143q.326.075.566.211t.375.358.135.56q0 .37-.188.656a1.2 1.2 0 0 1-.539.439q-.351.158-.858.158-.381 0-.665-.09a1.4 1.4 0 0 1-.478-.252 1.1 1.1 0 0 1-.29-.375" />
-                                </svg></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#html"><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                    height="20" fill="salmon" class="bi bi-filetype-html" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M14 4.5V11h-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zm-9.736 7.35v3.999h-.791v-1.714H1.79v1.714H1V11.85h.791v1.626h1.682V11.85h.79Zm2.251.662v3.337h-.794v-3.337H4.588v-.662h3.064v.662zm2.176 3.337v-2.66h.038l.952 2.159h.516l.946-2.16h.038v2.661h.715V11.85h-.8l-1.14 2.596H9.93L8.79 11.85h-.805v3.999zm4.71-.674h1.696v.674H12.61V11.85h.79v3.325Z" />
-                                </svg></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="save">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="greenyellow"
-                                    class="bi bi-floppy-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z" />
-                                    <path
-                                        d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z" />
-                                </svg>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="formatter" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-vector-pen" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M10.646.646a.5.5 0 0 1 .708 0l4 4a.5.5 0 0 1 0 .708l-1.902 1.902-.829 3.313a1.5 1.5 0 0 1-1.024 1.073L1.254 14.746 4.358 4.4A1.5 1.5 0 0 1 5.43 3.377l3.313-.828zm-1.8 2.908-3.173.793a.5.5 0 0 0-.358.342l-2.57 8.565 8.567-2.57a.5.5 0 0 0 .34-.357l.794-3.174-3.6-3.6z" />
-                                    <path fill-rule="evenodd"
-                                        d="M2.832 13.228 8 9a1 1 0 1 0-1-1l-4.228 5.168-.026.086z" />
-                                </svg>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="expand" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                    height="16" fill="currentColor" class="bi bi-arrows-angle-expand"
-                                    viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707m4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707" />
-                                </svg></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="aboutLink">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="descriptionLink">Description</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="photoLink">Cover</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit">Search</button>
-                    </form>
+                <button onclick="injectScriptsOnly()" class="btn btn-primary mt-3" id="buttonInsertScript">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-arrow-bar-down" local="https://icons.getbootstrap.com/icons/arrow-bar-down/"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5M8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- HTML Section -->
+            <div class="w-100 mt-3 config-container rounded p-1 shadow-lg">
+                <h5><svg height="64px" width="64px" local="https://www.svgrepo.com/svg/7866/html" version="1.1"
+                        id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 56 56" xml:space="preserve" fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g>
+                                <path style="fill:#E9E9E0;"
+                                    d="M36.985,0H7.963C7.155,0,6.5,0.655,6.5,1.926V55c0,0.345,0.655,1,1.463,1h40.074 c0.808,0,1.463-0.655,1.463-1V12.978c0-0.696-0.093-0.92-0.257-1.085L37.607,0.257C37.442,0.093,37.218,0,36.985,0z">
+                                </path>
+                                <polygon style="fill:#D9D7CA;" points="37.5,0.151 37.5,12 49.349,12 "></polygon>
+                                <path style="fill:#EC6630;"
+                                    d="M48.037,56H7.963C7.155,56,6.5,55.345,6.5,54.537V39h43v15.537C49.5,55.345,48.845,56,48.037,56z">
+                                </path>
+                                <g>
+                                    <path style="fill:#FFFFFF;"
+                                        d="M17.455,42.924V53h-1.641v-4.539h-4.361V53H9.785V42.924h1.668v4.416h4.361v-4.416H17.455z">
+                                    </path>
+                                    <path style="fill:#FFFFFF;"
+                                        d="M27.107,42.924v1.121H24.1V53h-1.654v-8.955h-3.008v-1.121H27.107z"></path>
+                                    <path style="fill:#FFFFFF;"
+                                        d="M36.705,42.924h1.668V53h-1.668v-6.932l-2.256,5.605H33l-2.27-5.605V53h-1.668V42.924h1.668 l2.994,6.891L36.705,42.924z">
+                                    </path>
+                                    <path style="fill:#FFFFFF;" d="M42.57,42.924v8.832h4.635V53h-6.303V42.924H42.57z">
+                                    </path>
+                                </g>
+                                <g>
+                                    <path style="fill:#EC6630;"
+                                        d="M23.207,16.293c-0.391-0.391-1.023-0.391-1.414,0l-6,6c-0.391,0.391-0.391,1.023,0,1.414l6,6 C21.988,29.902,22.244,30,22.5,30s0.512-0.098,0.707-0.293c0.391-0.391,0.391-1.023,0-1.414L17.914,23l5.293-5.293 C23.598,17.316,23.598,16.684,23.207,16.293z">
+                                    </path>
+                                    <path style="fill:#EC6630;"
+                                        d="M41.207,22.293l-6-6c-0.391-0.391-1.023-0.391-1.414,0s-0.391,1.023,0,1.414L39.086,23 l-5.293,5.293c-0.391,0.391-0.391,1.023,0,1.414C33.988,29.902,34.244,30,34.5,30s0.512-0.098,0.707-0.293l6-6 C41.598,23.316,41.598,22.684,41.207,22.293z">
+                                    </path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg> Head Links</h5>
+                <div class="d-flex flex-row justify-content-center align-items-baseline">
+                    <input type="text" class="form-control mb-2"
+                        placeholder="e.g. &lt;meta&gt;, &lt;link&gt;, &lt;title&gt; etc." disabled />
+                    <button class="btn btn-sm btn-success m-1" onclick="addInput('htmlInputs')"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus" viewBox="0 0 16 16">
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                        </svg></button>
+                </div>
+                <div id="htmlInputs" class="overflow-y-auto scrollbar-thin inputs-helpers-container">
                 </div>
             </div>
-        </nav>
+
+            <!-- CSS Section -->
+            <div class="w-100 mt-4 config-container rounded p-1 shadow-lg">
+                <h5><svg height="64px" width="64px" local="https://www.svgrepo.com/svg/21671/css" version="1.1"
+                        id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 56 56" xml:space="preserve" fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g>
+                                <path style="fill:#E9E9E0;"
+                                    d="M36.985,0H7.963C7.155,0,6.5,0.655,6.5,1.926V55c0,0.345,0.655,1,1.463,1h40.074 c0.808,0,1.463-0.655,1.463-1V12.978c0-0.696-0.093-0.92-0.257-1.085L37.607,0.257C37.442,0.093,37.218,0,36.985,0z">
+                                </path>
+                                <polygon style="fill:#D9D7CA;" points="37.5,0.151 37.5,12 49.349,12 "></polygon>
+                                <path style="fill:#0096E6;"
+                                    d="M48.037,56H7.963C7.155,56,6.5,55.345,6.5,54.537V39h43v15.537C49.5,55.345,48.845,56,48.037,56z">
+                                </path>
+                                <g>
+                                    <path style="fill:#FFFFFF;"
+                                        d="M23.58,51.975c-0.374,0.364-0.798,0.638-1.271,0.82s-0.984,0.273-1.531,0.273 c-0.602,0-1.155-0.109-1.661-0.328s-0.948-0.542-1.326-0.971s-0.675-0.966-0.889-1.613c-0.214-0.647-0.321-1.395-0.321-2.242 s0.107-1.593,0.321-2.235c0.214-0.643,0.511-1.178,0.889-1.606s0.822-0.754,1.333-0.978s1.062-0.335,1.654-0.335 c0.547,0,1.058,0.091,1.531,0.273s0.897,0.456,1.271,0.82l-1.135,1.012c-0.228-0.265-0.48-0.456-0.759-0.574 s-0.567-0.178-0.868-0.178c-0.337,0-0.658,0.063-0.964,0.191s-0.579,0.344-0.82,0.649s-0.431,0.699-0.567,1.183 s-0.21,1.075-0.219,1.777c0.009,0.684,0.08,1.267,0.212,1.75s0.314,0.877,0.547,1.183s0.497,0.528,0.793,0.67 s0.608,0.212,0.937,0.212s0.636-0.06,0.923-0.178s0.549-0.31,0.786-0.574L23.58,51.975z">
+                                    </path>
+                                    <path style="fill:#FFFFFF;"
+                                        d="M31.633,50.238c0,0.364-0.075,0.718-0.226,1.06s-0.362,0.643-0.636,0.902s-0.61,0.467-1.012,0.622 s-0.856,0.232-1.367,0.232c-0.219,0-0.444-0.012-0.677-0.034s-0.467-0.062-0.704-0.116s-0.463-0.13-0.677-0.226 s-0.398-0.212-0.554-0.349l0.287-1.176c0.128,0.073,0.289,0.144,0.485,0.212s0.398,0.132,0.608,0.191s0.419,0.107,0.629,0.144 s0.405,0.055,0.588,0.055c0.556,0,0.982-0.13,1.278-0.39s0.444-0.645,0.444-1.155c0-0.31-0.104-0.574-0.314-0.793 s-0.472-0.417-0.786-0.595s-0.654-0.355-1.019-0.533s-0.706-0.388-1.025-0.629s-0.583-0.526-0.793-0.854s-0.314-0.738-0.314-1.23 c0-0.446,0.082-0.843,0.246-1.189s0.385-0.641,0.663-0.882s0.602-0.426,0.971-0.554s0.759-0.191,1.169-0.191 c0.419,0,0.843,0.039,1.271,0.116s0.774,0.203,1.039,0.376c-0.055,0.118-0.118,0.248-0.191,0.39s-0.142,0.273-0.205,0.396 c-0.063,0.123-0.118,0.226-0.164,0.308s-0.073,0.128-0.082,0.137c-0.055-0.027-0.116-0.063-0.185-0.109s-0.166-0.091-0.294-0.137 s-0.296-0.077-0.506-0.096s-0.479-0.014-0.807,0.014c-0.183,0.019-0.355,0.07-0.52,0.157s-0.31,0.193-0.438,0.321 s-0.228,0.271-0.301,0.431s-0.109,0.313-0.109,0.458c0,0.364,0.104,0.658,0.314,0.882s0.47,0.419,0.779,0.588 s0.647,0.333,1.012,0.492s0.704,0.354,1.019,0.581s0.576,0.513,0.786,0.854S31.633,49.7,31.633,50.238z">
+                                    </path>
+                                    <path style="fill:#FFFFFF;"
+                                        d="M39.043,50.238c0,0.364-0.075,0.718-0.226,1.06s-0.362,0.643-0.636,0.902s-0.61,0.467-1.012,0.622 s-0.856,0.232-1.367,0.232c-0.219,0-0.444-0.012-0.677-0.034s-0.467-0.062-0.704-0.116s-0.463-0.13-0.677-0.226 s-0.398-0.212-0.554-0.349l0.287-1.176c0.128,0.073,0.289,0.144,0.485,0.212s0.398,0.132,0.608,0.191s0.419,0.107,0.629,0.144 s0.405,0.055,0.588,0.055c0.556,0,0.982-0.13,1.278-0.39s0.444-0.645,0.444-1.155c0-0.31-0.104-0.574-0.314-0.793 s-0.472-0.417-0.786-0.595s-0.654-0.355-1.019-0.533s-0.706-0.388-1.025-0.629s-0.583-0.526-0.793-0.854s-0.314-0.738-0.314-1.23 c0-0.446,0.082-0.843,0.246-1.189s0.385-0.641,0.663-0.882s0.602-0.426,0.971-0.554s0.759-0.191,1.169-0.191 c0.419,0,0.843,0.039,1.271,0.116s0.774,0.203,1.039,0.376c-0.055,0.118-0.118,0.248-0.191,0.39s-0.142,0.273-0.205,0.396 s-0.118,0.226-0.164,0.308s-0.073,0.128-0.082,0.137c-0.055-0.027-0.116-0.063-0.185-0.109s-0.166-0.091-0.294-0.137 s-0.296-0.077-0.506-0.096s-0.479-0.014-0.807,0.014c-0.183,0.019-0.355,0.07-0.52,0.157s-0.31,0.193-0.438,0.321 s-0.228,0.271-0.301,0.431s-0.109,0.313-0.109,0.458c0,0.364,0.104,0.658,0.314,0.882s0.47,0.419,0.779,0.588 s0.647,0.333,1.012,0.492s0.704,0.354,1.019,0.581s0.576,0.513,0.786,0.854S39.043,49.7,39.043,50.238z">
+                                    </path>
+                                </g>
+                                <g>
+                                    <path style="fill:#0096E6;"
+                                        d="M19.5,19v-4c0-0.551,0.448-1,1-1c0.553,0,1-0.448,1-1s-0.447-1-1-1c-1.654,0-3,1.346-3,3v4 c0,1.103-0.897,2-2,2c-0.553,0-1,0.448-1,1s0.447,1,1,1c1.103,0,2,0.897,2,2v4c0,1.654,1.346,3,3,3c0.553,0,1-0.448,1-1 s-0.447-1-1-1c-0.552,0-1-0.449-1-1v-4c0-1.2-0.542-2.266-1.382-3C18.958,21.266,19.5,20.2,19.5,19z">
+                                    </path>
+                                    <path style="fill:#0096E6;"
+                                        d="M39.5,21c-1.103,0-2-0.897-2-2v-4c0-1.654-1.346-3-3-3c-0.553,0-1,0.448-1,1s0.447,1,1,1 c0.552,0,1,0.449,1,1v4c0,1.2,0.542,2.266,1.382,3c-0.84,0.734-1.382,1.8-1.382,3v4c0,0.551-0.448,1-1,1c-0.553,0-1,0.448-1,1 s0.447,1,1,1c1.654,0,3-1.346,3-3v-4c0-1.103,0.897-2,2-2c0.553,0,1-0.448,1-1S40.053,21,39.5,21z">
+                                    </path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg> CSS Links</h5>
+                <div class="d-flex flex-row justify-content-center align-items-baseline">
+                    <input type="text" class="form-control mb-2"
+                        placeholder='<link rel="stylesheet" href="https://example.com/styles.css">' disabled />
+                    <button class="btn btn-sm btn-success m-1" onclick="addInput('cssInputs')"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus" viewBox="0 0 16 16">
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                        </svg></button>
+                </div>
+                <div id="cssInputs" class="overflow-y-auto scrollbar-thin inputs-helpers-container">
+                </div>
+            </div>
+
+            <!-- JS Section -->
+            <div class="w-100 mt-4 config-container rounded p-1 shadow-lg">
+                <h5> <svg height="64px" width="64px" local="https://www.svgrepo.com/svg/29753/javascript" version="1.1"
+                        id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 56 56" xml:space="preserve" fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g>
+                                <path style="fill:#E9E9E0;"
+                                    d="M36.985,0H7.963C7.155,0,6.5,0.655,6.5,1.926V55c0,0.345,0.655,1,1.463,1h40.074 c0.808,0,1.463-0.655,1.463-1V12.978c0-0.696-0.093-0.92-0.257-1.085L37.607,0.257C37.442,0.093,37.218,0,36.985,0z">
+                                </path>
+                                <polygon style="fill:#D9D7CA;" points="37.5,0.151 37.5,12 49.349,12 "></polygon>
+                                <path style="fill:#EEAF4B;"
+                                    d="M48.037,56H7.963C7.155,56,6.5,55.345,6.5,54.537V39h43v15.537C49.5,55.345,48.845,56,48.037,56z">
+                                </path>
+                                <g>
+                                    <path style="fill:#FFFFFF;"
+                                        d="M26.021,42.719v7.848c0,0.474-0.087,0.873-0.26,1.196c-0.174,0.323-0.406,0.583-0.697,0.779 c-0.292,0.196-0.627,0.333-1.005,0.41s-0.769,0.116-1.169,0.116c-0.201,0-0.436-0.021-0.704-0.062s-0.547-0.104-0.834-0.191 s-0.563-0.185-0.827-0.294c-0.265-0.109-0.488-0.232-0.67-0.369l0.697-1.107c0.091,0.063,0.221,0.13,0.39,0.198 s0.353,0.132,0.554,0.191c0.2,0.06,0.41,0.111,0.629,0.157s0.424,0.068,0.615,0.068c0.482,0,0.868-0.094,1.155-0.28 s0.439-0.504,0.458-0.95v-7.711H26.021z">
+                                    </path>
+                                    <path style="fill:#FFFFFF;"
+                                        d="M34.184,50.238c0,0.364-0.075,0.718-0.226,1.06s-0.362,0.643-0.636,0.902s-0.611,0.467-1.012,0.622 c-0.401,0.155-0.857,0.232-1.367,0.232c-0.219,0-0.444-0.012-0.677-0.034s-0.468-0.062-0.704-0.116 c-0.237-0.055-0.463-0.13-0.677-0.226s-0.399-0.212-0.554-0.349l0.287-1.176c0.127,0.073,0.289,0.144,0.485,0.212 s0.398,0.132,0.608,0.191c0.209,0.06,0.419,0.107,0.629,0.144c0.209,0.036,0.405,0.055,0.588,0.055c0.556,0,0.982-0.13,1.278-0.39 s0.444-0.645,0.444-1.155c0-0.31-0.105-0.574-0.314-0.793c-0.21-0.219-0.472-0.417-0.786-0.595s-0.654-0.355-1.019-0.533 c-0.365-0.178-0.707-0.388-1.025-0.629c-0.319-0.241-0.584-0.526-0.793-0.854c-0.21-0.328-0.314-0.738-0.314-1.23 c0-0.446,0.082-0.843,0.246-1.189s0.385-0.641,0.663-0.882s0.602-0.426,0.971-0.554s0.759-0.191,1.169-0.191 c0.419,0,0.843,0.039,1.271,0.116c0.428,0.077,0.774,0.203,1.039,0.376c-0.055,0.118-0.119,0.248-0.191,0.39 c-0.073,0.142-0.142,0.273-0.205,0.396c-0.064,0.123-0.119,0.226-0.164,0.308c-0.046,0.082-0.073,0.128-0.082,0.137 c-0.055-0.027-0.116-0.063-0.185-0.109s-0.167-0.091-0.294-0.137c-0.128-0.046-0.297-0.077-0.506-0.096 c-0.21-0.019-0.479-0.014-0.807,0.014c-0.183,0.019-0.355,0.07-0.52,0.157s-0.311,0.193-0.438,0.321 c-0.128,0.128-0.229,0.271-0.301,0.431c-0.073,0.159-0.109,0.313-0.109,0.458c0,0.364,0.104,0.658,0.314,0.882 c0.209,0.224,0.469,0.419,0.779,0.588c0.31,0.169,0.646,0.333,1.012,0.492c0.364,0.159,0.704,0.354,1.019,0.581 s0.576,0.513,0.786,0.854C34.078,49.261,34.184,49.7,34.184,50.238z">
+                                    </path>
+                                </g>
+                                <g>
+                                    <path style="fill:#EEAF4B;"
+                                        d="M19.5,19v-4c0-0.551,0.448-1,1-1c0.553,0,1-0.448,1-1s-0.447-1-1-1c-1.654,0-3,1.346-3,3v4 c0,1.103-0.897,2-2,2c-0.553,0-1,0.448-1,1s0.447,1,1,1c1.103,0,2,0.897,2,2v4c0,1.654,1.346,3,3,3c0.553,0,1-0.448,1-1 s-0.447-1-1-1c-0.552,0-1-0.449-1-1v-4c0-1.2-0.542-2.266-1.382-3C18.958,21.266,19.5,20.2,19.5,19z">
+                                    </path>
+                                    <circle style="fill:#EEAF4B;" cx="27.5" cy="18.5" r="1.5"></circle>
+                                    <path style="fill:#EEAF4B;"
+                                        d="M39.5,21c-1.103,0-2-0.897-2-2v-4c0-1.654-1.346-3-3-3c-0.553,0-1,0.448-1,1s0.447,1,1,1 c0.552,0,1,0.449,1,1v4c0,1.2,0.542,2.266,1.382,3c-0.84,0.734-1.382,1.8-1.382,3v4c0,0.551-0.448,1-1,1c-0.553,0-1,0.448-1,1 s0.447,1,1,1c1.654,0,3-1.346,3-3v-4c0-1.103,0.897-2,2-2c0.553,0,1-0.448,1-1S40.053,21,39.5,21z">
+                                    </path>
+                                    <path style="fill:#EEAF4B;"
+                                        d="M27.5,24c-0.553,0-1,0.448-1,1v3c0,0.552,0.447,1,1,1s1-0.448,1-1v-3 C28.5,24.448,28.053,24,27.5,24z">
+                                    </path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg> Script Links</h5>
+                <div class="d-flex flex-row justify-content-center align-items-baseline">
+                    <input type="text" class="form-control mb-2"
+                        placeholder='<script src=href="https://example.com/styles.css"></script>' disabled />
+                    <button class="btn btn-sm btn-success m-1" onclick="addInput('jsInputs')"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus" viewBox="0 0 16 16">
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                        </svg></button>
+                </div>
+                <div id="jsInputs" class="overflow-y-auto scrollbar-thin inputs-helpers-container">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- tags -->
+    <div class="container-links-options bg-body-secondary scrollbar-thin" id="tags">
+        <div class="w-100 d-flex align-items-center flex-column mb-auto mt-auto bg-transparent rounded p-1">
+            <div class="w-100 p-2 layout-tags">
+                <button class="btn btn-danger" id="closeTags">
+                    <svg xmlns="http://www.w3.org/2000/svg" local="https://icons.getbootstrap.com/icons/x-lg/"
+                        width="40" height="40" fill="white" class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path
+                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- START: Tag Input Section -->
+            <div class="w-100 mt-3 px-2 layout-tags">
+                <div class="input-group mb-2">
+                    <input type="text" id="tagInput" class="form-control" placeholder="Type a tag">
+                    <button class="btn btn-success border" id="addTagBtn">Add Tag</button>
+                </div>
+                <div id="tagsContainer" class="d-flex flex-wrap gap-2"></div>
+                <p class="visually-hidden" id="tagsProjectText"></p>
+            </div>
+            <!-- END: Tag Input Section -->
+
+            <p class="visually-hidden" id="tagsProjectText"></p>
+
+        </div>
+    </div>
+
+    <!-- Run as Module -->
+    <label class="m-2 text-center visually-hidden">
+        <input type="checkbox" id="useModule" />
+        Run JavaScript as <code>&lt;script type="module"&gt;</code>
+    </label>
+
+    <header
+        class="d-flex shadow-strong transitionAll flex-column flex-shrink-0 bg-body-tertiary position-fixed width-sidebar vh-100 top-0 start-0 z-3 overflow-hidden">
+        <a href="home.html" title="Home" class="d-block p-3 link-body-emphasis text-decoration-none"
+            data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only"> <svg
+                local="https://icons.getbootstrap.com/icons/code-square/" xmlns="http://www.w3.org/2000/svg" width="40"
+                height="32" fill="currentColor" class="bi bi-code-square" viewBox="0 0 16 16">
+                <path
+                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                <path
+                    d="M6.854 4.646a.5.5 0 0 1 0 .708L4.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0m2.292 0a.5.5 0 0 0 0 .708L11.793 8l-2.647 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708 0" />
+            </svg> <span class="visually-hidden">Icon-only</span> </a>
+        <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+            <li> <a title="About" href="#" id="aboutLink" class="nav-link py-3 border-bottom rounded-0"
+                    data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Dashboard"
+                    data-bs-original-title="Dashboard"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-person-circle"
+                        local="https://icons.getbootstrap.com/icons/person-circle/" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                    </svg> </a> </li>
+
+            <li> <a title="Save" href="#" id="save" class="nav-link py-3 border-bottom rounded-0"
+                    data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Customers"
+                    data-bs-original-title="Customers">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-floppy-fill" local="https://icons.getbootstrap.com/icons/floppy-fill/"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z" />
+                        <path
+                            d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z" />
+                    </svg> </a> </li>
+
+            <li class="nav-item"> <a title="Format" href="#" id="formatter"
+                    class="nav-link py-3 border-bottom rounded-0" aria-current="page" data-bs-toggle="tooltip"
+                    data-bs-placement="right" aria-label="Home" data-bs-original-title="Home">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-vector-pen" local="https://icons.getbootstrap.com/icons/vector-pen/"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M10.646.646a.5.5 0 0 1 .708 0l4 4a.5.5 0 0 1 0 .708l-1.902 1.902-.829 3.313a1.5 1.5 0 0 1-1.024 1.073L1.254 14.746 4.358 4.4A1.5 1.5 0 0 1 5.43 3.377l3.313-.828zm-1.8 2.908-3.173.793a.5.5 0 0 0-.358.342l-2.57 8.565 8.567-2.57a.5.5 0 0 0 .34-.357l.794-3.174-3.6-3.6z" />
+                        <path fill-rule="evenodd" d="M2.832 13.228 8 9a1 1 0 1 0-1-1l-4.228 5.168-.026.086z" />
+                    </svg> </a> </li>
+
+            <li> <a title="Zoom" href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip"
+                    id="cycle-btn" data-bs-placement="right" aria-label="Customers" data-bs-original-title="Customers">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        local="https://icons.getbootstrap.com/icons/zoom-in/" class="bi bi-zoom-in" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11M13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0">
+                        </path>
+                        <path
+                            d="M10.344 11.742q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1 6.5 6.5 0 0 1-1.398 1.4z">
+                        </path>
+                        <path fill-rule="evenodd"
+                            d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5">
+                        </path>
+                    </svg> </a> </li>
+
+
+            <li> <a title="Download" href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip"
+                    id="downloadZip" data-bs-placement="right" aria-label="Customers"
+                    data-bs-original-title="Customers"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-box-arrow-down"
+                        local="https://icons.getbootstrap.com/icons/box-arrow-down/" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1z" />
+                        <path fill-rule="evenodd"
+                            d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708z" />
+                    </svg> </a> </li>
+
+            <li> <a title="Change" href="#" class="nav-link py-3 border-bottom rounded-0 d-none"
+                    data-bs-toggle="tooltip" id="changeSections" data-bs-placement="right" aria-label="Customers"
+                    data-bs-original-title="Customers"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-recycle" local="https://icons.getbootstrap.com/icons/recycle/"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M9.302 1.256a1.5 1.5 0 0 0-2.604 0l-1.704 2.98a.5.5 0 0 0 .869.497l1.703-2.981a.5.5 0 0 1 .868 0l2.54 4.444-1.256-.337a.5.5 0 1 0-.26.966l2.415.647a.5.5 0 0 0 .613-.353l.647-2.415a.5.5 0 1 0-.966-.259l-.333 1.242zM2.973 7.773l-1.255.337a.5.5 0 1 1-.26-.966l2.416-.647a.5.5 0 0 1 .612.353l.647 2.415a.5.5 0 0 1-.966.259l-.333-1.242-2.545 4.454a.5.5 0 0 0 .434.748H5a.5.5 0 0 1 0 1H1.723A1.5 1.5 0 0 1 .421 12.24zm10.89 1.463a.5.5 0 1 0-.868.496l1.716 3.004a.5.5 0 0 1-.434.748h-5.57l.647-.646a.5.5 0 1 0-.708-.707l-1.5 1.5a.5.5 0 0 0 0 .707l1.5 1.5a.5.5 0 1 0 .708-.707l-.647-.647h5.57a1.5 1.5 0 0 0 1.302-2.244z" />
+                    </svg> </a> </li>
+
+            <li> <a title="Configuration" href="#" class="nav-link py-3 border-bottom rounded-0 d-none"
+                    data-bs-toggle="tooltip" id="configLink" data-bs-placement="right" aria-label="Customers"
+                    data-bs-original-title="Customers"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-nut-fill"
+                        local="https://icons.getbootstrap.com/icons/nut-fill/" viewBox="0 0 16 16">
+                        <path
+                            d="M4.58 1a1 1 0 0 0-.868.504l-3.428 6a1 1 0 0 0 0 .992l3.428 6A1 1 0 0 0 4.58 15h6.84a1 1 0 0 0 .868-.504l3.429-6a1 1 0 0 0 0-.992l-3.429-6A1 1 0 0 0 11.42 1zm5.018 9.696a3 3 0 1 1-3-5.196 3 3 0 0 1 3 5.196" />
+                    </svg> </a> </li>
+
+            <li> <a title="Description" href="#" id="descriptionLink" class="nav-link py-3 border-bottom rounded-0"
+                    data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders"
+                    data-bs-original-title="Orders"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" local="https://icons.getbootstrap.com/icons/book/" class="bi bi-book"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
+                    </svg> </a> </li>
+            <li> <a title="Photo" href="#" id="photoLink" class="nav-link py-3 border-bottom rounded-0"
+                    data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Products"
+                    data-bs-original-title="Products"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-card-image"
+                        local="https://icons.getbootstrap.com/icons/card-image/" viewBox="0 0 16 16">
+                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                        <path
+                            d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z" />
+                    </svg> </a> </li>
+
+            <li> <a title="Tags" href="#" id="tagsLink" class="nav-link py-3 border-bottom rounded-0"
+                    data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Products"
+                    data-bs-original-title="Products"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-tags" local="https://icons.getbootstrap.com/icons/tags/"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M3 2v4.586l7 7L14.586 9l-7-7zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586z" />
+                        <path
+                            d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1z" />
+                    </svg> </a> </li>
+
+            <li> <a title="Mode" href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip"
+                    id="darkLightMode" mode="light" data-bs-placement="right" aria-label="Customers"
+                    data-bs-original-title="Customers">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-sun-fill" local="https://icons.getbootstrap.com/icons/sun-fill/"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708">
+                        </path>
+                    </svg> </a> </li>
+
+        </ul>
+        <div class="dropdown border-top d-flex justify-content-center align-items-center text-center">
+            <img id="imgRedirectUserToProfile" src="" alt="" width="32" height="32"
+                class="d-none rounded-circle object-fit-cover m-2 cursor-pointer">
+        </div>
     </header>
 
     <main>
         <section>
             <article>
-                <div class="position-fixed w-100 overflow-y-scroll top-0 start-0 bottom-50" style="margin-top: 60px;">
-                    <div style="max-height: 50vh;">
+                <div layout-position="vertical"
+                    class="position-fixed padding-sidebar transitionAll w-100 overflow-y-scroll top-0 start-0 bottom-50 scrollbar-thin editors-previews-container"
+                    id="editors-preview">
+                    <!-- style="margin-top: 60px; min-height: 15vh; height: 40vh;" -->
+                    <div class="h-100 editors-preview-inner-wrapper"> <!-- style="min-height: 15vh;" -->
                         <!-- ** -->
-                        <section id="javascript" class="pt-1">
-                            <h2 class="m-2"><svg xmlns="http://www.w3.org/2000/svg" aria-label="JavaScript" role="img"
-                                    viewBox="0 0 512 512" width="64px" height="64px" fill="#000000">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <rect width="512" height="512" rx="15%" fill="#f7df1e"></rect>
-                                        <path
-                                            d="M324 370c10 17 24 29 47 29c20 0 33-10 33 -24c0-16 -13 -22 -35 -32l-12-5c-35-15 -58 -33 -58 -72c0-36 27 -64 70 -64c31 0 53 11 68 39l-37 24c-8-15 -17 -21 -31 -21c-14 0-23 9 -23 21c0 14 9 20 30 29l12 5c41 18 64 35 64 76c0 43-34 67 -80 67c-45 0-74 -21 -88 -49zm-170 4c8 13 14 25 31 25c16 0 26-6 26 -30V203h48v164c0 50-29 72 -72 72c-39 0-61 -20 -72 -44z">
-                                        </path>
-                                    </g>
-                                </svg></h2>
-                            <div style="max-height: 500px;" class="overflow-auto shadow m-2">
-                                <div id="js-editor" class="editor"></div>
-                            </div>
-                            <button class="btn btn-outline-dark m-2" onclick="getText('js-editor')"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-clipboard2-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5z" />
-                                    <path
-                                        d="M3.5 1h.585A1.5 1.5 0 0 0 4 1.5V2a1.5 1.5 0 0 0 1.5 1.5h5A1.5 1.5 0 0 0 12 2v-.5q-.001-.264-.085-.5h.585A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-12A1.5 1.5 0 0 1 3.5 1" />
-                                </svg></button>
-                        </section>
-                        <!-- ** -->
-
-                        <!-- ** -->
-                        <section id="css" class="pt-1">
-                            <h2 class="m-2"><img src="https://img.icons8.com/?size=64&id=1044&format=png&color=339AF0"
-                                    alt="" srcset=""></h2>
-                            <div style="max-height: 500px;" class="overflow-auto shadow m-2">
-                                <div id="css-editor" class="editor"></div>
-                            </div>
-                            <button class="btn btn-outline-dark m-2" onclick="getText('css-editor')"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-clipboard2-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5z" />
-                                    <path
-                                        d="M3.5 1h.585A1.5 1.5 0 0 0 4 1.5V2a1.5 1.5 0 0 0 1.5 1.5h5A1.5 1.5 0 0 0 12 2v-.5q-.001-.264-.085-.5h.585A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-12A1.5 1.5 0 0 1 3.5 1" />
-                                </svg></button>
-                            <!-- ** -->
-                        </section>
-
-                        <!-- ** -->
-                        <section id="html" class="pt-1">
-                            <h2 class="m-2"><svg style="border-radius: 13px;" height="64px" width="64px" version="1.1"
-                                    id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 15.332 15.332"
-                                    xml:space="preserve" fill="#000000">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <g>
-                                            <path style="fill: #FA8072;"
-                                                d="M14.395,0H0.938C0.419,0,0,0.42,0,0.938v13.455c0,0.52,0.42,0.939,0.938,0.939h13.456 c0.519,0,0.938-0.42,0.938-0.939V0.938C15.333,0.42,14.913,0,14.395,0z M4.463,9.427H3.669V7.955H2.357v1.472H1.558V5.906h0.799 V7.26h1.312V5.906h0.794V9.427z M7.6,6.574H6.639v2.853h-0.8V6.574H4.893V5.906H7.6C7.6,5.906,7.6,6.574,7.6,6.574z M11.034,9.427 L10.982,8.08c-0.016-0.424-0.031-0.936-0.031-1.447h-0.015c-0.11,0.449-0.257,0.951-0.393,1.363l-0.429,1.375H9.493L9.116,8.007 C9.001,7.594,8.881,7.092,8.798,6.633H8.787C8.766,7.108,8.751,7.652,8.724,8.09L8.661,9.427H7.924l0.225-3.521h1.062l0.345,1.176 c0.109,0.407,0.22,0.846,0.298,1.259H9.87c0.1-0.408,0.22-0.873,0.334-1.265l0.377-1.17h1.04l0.193,3.521 C11.814,9.427,11.034,9.427,11.034,9.427z M14.626,9.427h-2.2V5.906h0.8V8.76h1.4C14.626,8.76,14.626,9.427,14.626,9.427z">
-                                            </path>
+                        <div class="editor-row-container transitionAll overflow-x-auto scrollbar-none"
+                            id="editor-row-container">
+                            <section id="javascript" class="editor-section p-1 transitionAll shadow-strong rounded">
+                                <div
+                                    class="content-of-editor-min rounded d-none w-100 h-100 align-items-center justify-content-center">
+                                    <svg height="64px" width="64px" class="img-fluid p-1"
+                                        local="https://www.svgrepo.com/svg/29753/javascript" version="1.1" id="Capa_1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        viewBox="0 0 56 56" xml:space="preserve" fill="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
                                         </g>
-                                    </g>
-                                </svg></h2>
-                            <div style="max-height: 500px;" class="overflow-auto shadow m-2">
-                                <div id="html-editor" class="editor"></div>
-                            </div>
-                            <button class="btn btn-outline-dark m-2" onclick="getText('html-editor')"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-clipboard2-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5z" />
-                                    <path
-                                        d="M3.5 1h.585A1.5 1.5 0 0 0 4 1.5V2a1.5 1.5 0 0 0 1.5 1.5h5A1.5 1.5 0 0 0 12 2v-.5q-.001-.264-.085-.5h.585A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-12A1.5 1.5 0 0 1 3.5 1" />
-                                </svg></button>
-                        </section>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <g>
+                                                <path style="fill:#E9E9E0;"
+                                                    d="M36.985,0H7.963C7.155,0,6.5,0.655,6.5,1.926V55c0,0.345,0.655,1,1.463,1h40.074 c0.808,0,1.463-0.655,1.463-1V12.978c0-0.696-0.093-0.92-0.257-1.085L37.607,0.257C37.442,0.093,37.218,0,36.985,0z">
+                                                </path>
+                                                <polygon style="fill:#D9D7CA;" points="37.5,0.151 37.5,12 49.349,12 ">
+                                                </polygon>
+                                                <path style="fill:#EEAF4B;"
+                                                    d="M48.037,56H7.963C7.155,56,6.5,55.345,6.5,54.537V39h43v15.537C49.5,55.345,48.845,56,48.037,56z">
+                                                </path>
+                                                <g>
+                                                    <path style="fill:#FFFFFF;"
+                                                        d="M26.021,42.719v7.848c0,0.474-0.087,0.873-0.26,1.196c-0.174,0.323-0.406,0.583-0.697,0.779 c-0.292,0.196-0.627,0.333-1.005,0.41s-0.769,0.116-1.169,0.116c-0.201,0-0.436-0.021-0.704-0.062s-0.547-0.104-0.834-0.191 s-0.563-0.185-0.827-0.294c-0.265-0.109-0.488-0.232-0.67-0.369l0.697-1.107c0.091,0.063,0.221,0.13,0.39,0.198 s0.353,0.132,0.554,0.191c0.2,0.06,0.41,0.111,0.629,0.157s0.424,0.068,0.615,0.068c0.482,0,0.868-0.094,1.155-0.28 s0.439-0.504,0.458-0.95v-7.711H26.021z">
+                                                    </path>
+                                                    <path style="fill:#FFFFFF;"
+                                                        d="M34.184,50.238c0,0.364-0.075,0.718-0.226,1.06s-0.362,0.643-0.636,0.902s-0.611,0.467-1.012,0.622 c-0.401,0.155-0.857,0.232-1.367,0.232c-0.219,0-0.444-0.012-0.677-0.034s-0.468-0.062-0.704-0.116 c-0.237-0.055-0.463-0.13-0.677-0.226s-0.399-0.212-0.554-0.349l0.287-1.176c0.127,0.073,0.289,0.144,0.485,0.212 s0.398,0.132,0.608,0.191c0.209,0.06,0.419,0.107,0.629,0.144c0.209,0.036,0.405,0.055,0.588,0.055c0.556,0,0.982-0.13,1.278-0.39 s0.444-0.645,0.444-1.155c0-0.31-0.105-0.574-0.314-0.793c-0.21-0.219-0.472-0.417-0.786-0.595s-0.654-0.355-1.019-0.533 c-0.365-0.178-0.707-0.388-1.025-0.629c-0.319-0.241-0.584-0.526-0.793-0.854c-0.21-0.328-0.314-0.738-0.314-1.23 c0-0.446,0.082-0.843,0.246-1.189s0.385-0.641,0.663-0.882s0.602-0.426,0.971-0.554s0.759-0.191,1.169-0.191 c0.419,0,0.843,0.039,1.271,0.116c0.428,0.077,0.774,0.203,1.039,0.376c-0.055,0.118-0.119,0.248-0.191,0.39 c-0.073,0.142-0.142,0.273-0.205,0.396c-0.064,0.123-0.119,0.226-0.164,0.308c-0.046,0.082-0.073,0.128-0.082,0.137 c-0.055-0.027-0.116-0.063-0.185-0.109s-0.167-0.091-0.294-0.137c-0.128-0.046-0.297-0.077-0.506-0.096 c-0.21-0.019-0.479-0.014-0.807,0.014c-0.183,0.019-0.355,0.07-0.52,0.157s-0.311,0.193-0.438,0.321 c-0.128,0.128-0.229,0.271-0.301,0.431c-0.073,0.159-0.109,0.313-0.109,0.458c0,0.364,0.104,0.658,0.314,0.882 c0.209,0.224,0.469,0.419,0.779,0.588c0.31,0.169,0.646,0.333,1.012,0.492c0.364,0.159,0.704,0.354,1.019,0.581 s0.576,0.513,0.786,0.854C34.078,49.261,34.184,49.7,34.184,50.238z">
+                                                    </path>
+                                                </g>
+                                                <g>
+                                                    <path style="fill:#EEAF4B;"
+                                                        d="M19.5,19v-4c0-0.551,0.448-1,1-1c0.553,0,1-0.448,1-1s-0.447-1-1-1c-1.654,0-3,1.346-3,3v4 c0,1.103-0.897,2-2,2c-0.553,0-1,0.448-1,1s0.447,1,1,1c1.103,0,2,0.897,2,2v4c0,1.654,1.346,3,3,3c0.553,0,1-0.448,1-1 s-0.447-1-1-1c-0.552,0-1-0.449-1-1v-4c0-1.2-0.542-2.266-1.382-3C18.958,21.266,19.5,20.2,19.5,19z">
+                                                    </path>
+                                                    <circle style="fill:#EEAF4B;" cx="27.5" cy="18.5" r="1.5"></circle>
+                                                    <path style="fill:#EEAF4B;"
+                                                        d="M39.5,21c-1.103,0-2-0.897-2-2v-4c0-1.654-1.346-3-3-3c-0.553,0-1,0.448-1,1s0.447,1,1,1 c0.552,0,1,0.449,1,1v4c0,1.2,0.542,2.266,1.382,3c-0.84,0.734-1.382,1.8-1.382,3v4c0,0.551-0.448,1-1,1c-0.553,0-1,0.448-1,1 s0.447,1,1,1c1.654,0,3-1.346,3-3v-4c0-1.103,0.897-2,2-2c0.553,0,1-0.448,1-1S40.053,21,39.5,21z">
+                                                    </path>
+                                                    <path style="fill:#EEAF4B;"
+                                                        d="M27.5,24c-0.553,0-1,0.448-1,1v3c0,0.552,0.447,1,1,1s1-0.448,1-1v-3 C28.5,24.448,28.053,24,27.5,24z">
+                                                    </path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+
+                                <div
+                                    class="content-of-editor d-flex align-items-start justify-content-start h-100 flex-column">
+                                    <!-- Options layout -->
+                                    <div
+                                        class="d-flex bg-transparent justify-content-start flex-row align-items-center">
+                                        <h2 title="Type Module" class="m-2"><svg height="64px" width="64px"
+                                                class="transitionAll cursor-pointer" id="jsTypeModule"
+                                                local="https://www.svgrepo.com/svg/29753/javascript" version="1.1"
+                                                id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 56 56"
+                                                xml:space="preserve" fill="#000000">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                </g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <g>
+                                                        <path style="fill:#E9E9E0;"
+                                                            d="M36.985,0H7.963C7.155,0,6.5,0.655,6.5,1.926V55c0,0.345,0.655,1,1.463,1h40.074 c0.808,0,1.463-0.655,1.463-1V12.978c0-0.696-0.093-0.92-0.257-1.085L37.607,0.257C37.442,0.093,37.218,0,36.985,0z">
+                                                        </path>
+                                                        <polygon style="fill:#D9D7CA;"
+                                                            points="37.5,0.151 37.5,12 49.349,12 ">
+                                                        </polygon>
+                                                        <path style="fill:#EEAF4B;"
+                                                            d="M48.037,56H7.963C7.155,56,6.5,55.345,6.5,54.537V39h43v15.537C49.5,55.345,48.845,56,48.037,56z">
+                                                        </path>
+                                                        <g>
+                                                            <path style="fill:#FFFFFF;"
+                                                                d="M26.021,42.719v7.848c0,0.474-0.087,0.873-0.26,1.196c-0.174,0.323-0.406,0.583-0.697,0.779 c-0.292,0.196-0.627,0.333-1.005,0.41s-0.769,0.116-1.169,0.116c-0.201,0-0.436-0.021-0.704-0.062s-0.547-0.104-0.834-0.191 s-0.563-0.185-0.827-0.294c-0.265-0.109-0.488-0.232-0.67-0.369l0.697-1.107c0.091,0.063,0.221,0.13,0.39,0.198 s0.353,0.132,0.554,0.191c0.2,0.06,0.41,0.111,0.629,0.157s0.424,0.068,0.615,0.068c0.482,0,0.868-0.094,1.155-0.28 s0.439-0.504,0.458-0.95v-7.711H26.021z">
+                                                            </path>
+                                                            <path style="fill:#FFFFFF;"
+                                                                d="M34.184,50.238c0,0.364-0.075,0.718-0.226,1.06s-0.362,0.643-0.636,0.902s-0.611,0.467-1.012,0.622 c-0.401,0.155-0.857,0.232-1.367,0.232c-0.219,0-0.444-0.012-0.677-0.034s-0.468-0.062-0.704-0.116 c-0.237-0.055-0.463-0.13-0.677-0.226s-0.399-0.212-0.554-0.349l0.287-1.176c0.127,0.073,0.289,0.144,0.485,0.212 s0.398,0.132,0.608,0.191c0.209,0.06,0.419,0.107,0.629,0.144c0.209,0.036,0.405,0.055,0.588,0.055c0.556,0,0.982-0.13,1.278-0.39 s0.444-0.645,0.444-1.155c0-0.31-0.105-0.574-0.314-0.793c-0.21-0.219-0.472-0.417-0.786-0.595s-0.654-0.355-1.019-0.533 c-0.365-0.178-0.707-0.388-1.025-0.629c-0.319-0.241-0.584-0.526-0.793-0.854c-0.21-0.328-0.314-0.738-0.314-1.23 c0-0.446,0.082-0.843,0.246-1.189s0.385-0.641,0.663-0.882s0.602-0.426,0.971-0.554s0.759-0.191,1.169-0.191 c0.419,0,0.843,0.039,1.271,0.116c0.428,0.077,0.774,0.203,1.039,0.376c-0.055,0.118-0.119,0.248-0.191,0.39 c-0.073,0.142-0.142,0.273-0.205,0.396c-0.064,0.123-0.119,0.226-0.164,0.308c-0.046,0.082-0.073,0.128-0.082,0.137 c-0.055-0.027-0.116-0.063-0.185-0.109s-0.167-0.091-0.294-0.137c-0.128-0.046-0.297-0.077-0.506-0.096 c-0.21-0.019-0.479-0.014-0.807,0.014c-0.183,0.019-0.355,0.07-0.52,0.157s-0.311,0.193-0.438,0.321 c-0.128,0.128-0.229,0.271-0.301,0.431c-0.073,0.159-0.109,0.313-0.109,0.458c0,0.364,0.104,0.658,0.314,0.882 c0.209,0.224,0.469,0.419,0.779,0.588c0.31,0.169,0.646,0.333,1.012,0.492c0.364,0.159,0.704,0.354,1.019,0.581 s0.576,0.513,0.786,0.854C34.078,49.261,34.184,49.7,34.184,50.238z">
+                                                            </path>
+                                                        </g>
+                                                        <g>
+                                                            <path style="fill:#EEAF4B;"
+                                                                d="M19.5,19v-4c0-0.551,0.448-1,1-1c0.553,0,1-0.448,1-1s-0.447-1-1-1c-1.654,0-3,1.346-3,3v4 c0,1.103-0.897,2-2,2c-0.553,0-1,0.448-1,1s0.447,1,1,1c1.103,0,2,0.897,2,2v4c0,1.654,1.346,3,3,3c0.553,0,1-0.448,1-1 s-0.447-1-1-1c-0.552,0-1-0.449-1-1v-4c0-1.2-0.542-2.266-1.382-3C18.958,21.266,19.5,20.2,19.5,19z">
+                                                            </path>
+                                                            <circle style="fill:#EEAF4B;" cx="27.5" cy="18.5" r="1.5">
+                                                            </circle>
+                                                            <path style="fill:#EEAF4B;"
+                                                                d="M39.5,21c-1.103,0-2-0.897-2-2v-4c0-1.654-1.346-3-3-3c-0.553,0-1,0.448-1,1s0.447,1,1,1 c0.552,0,1,0.449,1,1v4c0,1.2,0.542,2.266,1.382,3c-0.84,0.734-1.382,1.8-1.382,3v4c0,0.551-0.448,1-1,1c-0.553,0-1,0.448-1,1 s0.447,1,1,1c1.654,0,3-1.346,3-3v-4c0-1.103,0.897-2,2-2c0.553,0,1-0.448,1-1S40.053,21,39.5,21z">
+                                                            </path>
+                                                            <path style="fill:#EEAF4B;"
+                                                                d="M27.5,24c-0.553,0-1,0.448-1,1v3c0,0.552,0.447,1,1,1s1-0.448,1-1v-3 C28.5,24.448,28.053,24,27.5,24z">
+                                                            </path>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </h2>
+
+                                        <div
+                                            class="d-flex flex-column justify-content-start align-items-start optionsWidthCopy">
+                                            <div class="d-flex align-items-center gap-1 flex-row m-0 p-0">
+                                                <span title="Copy">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        local="https://icons.getbootstrap.com/icons/copy/"
+                                                        onclick="getText('js-editor')" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-copy cursor-pointer"
+                                                        viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                                                    </svg>
+                                                </span>
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    local="https://icons.getbootstrap.com/icons/activity/"
+                                                    id="svgTypeModule" width="16" height="16" fill="red"
+                                                    class="bi bi-activity cursor-pointer" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2" />
+                                                </svg>
+                                            </div>
+                                            <input type="range" title="Change width" for="javascript" color="bg-warning"
+                                                class="w-100 slider-width cursor-pointer mb-1 mt-1" min="5" max="100"
+                                                value="100">
+                                        </div>
+                                    </div>
+                                    <!-- Options layout -->
+
+                                    <!-- style="max-height: 500px;" -->
+                                    <div class="overflow-auto shadow h-100 w-100 scrollbar-none">
+                                        <div id="js-editor"
+                                            class="editor border-transparent bg-dark border-5 rounded scrollbar-none overflow-y-auto ms-1 me-1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- ** -->
+
+                            <!-- ** -->
+                            <section id="css" class="editor-section p-1 transitionAll shadow-strong rounded">
+                                <div
+                                    class="content-of-editor-min rounded d-none w-100 h-100 align-items-center justify-content-center">
+                                    <svg height="64px" width="64px" class="p-1 img-fluid"
+                                        local="https://www.svgrepo.com/svg/21671/css" version="1.1" id="Capa_1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        viewBox="0 0 56 56" xml:space="preserve" fill="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <g>
+                                                <path style="fill:#E9E9E0;"
+                                                    d="M36.985,0H7.963C7.155,0,6.5,0.655,6.5,1.926V55c0,0.345,0.655,1,1.463,1h40.074 c0.808,0,1.463-0.655,1.463-1V12.978c0-0.696-0.093-0.92-0.257-1.085L37.607,0.257C37.442,0.093,37.218,0,36.985,0z">
+                                                </path>
+                                                <polygon style="fill:#D9D7CA;" points="37.5,0.151 37.5,12 49.349,12 ">
+                                                </polygon>
+                                                <path style="fill:#0096E6;"
+                                                    d="M48.037,56H7.963C7.155,56,6.5,55.345,6.5,54.537V39h43v15.537C49.5,55.345,48.845,56,48.037,56z">
+                                                </path>
+                                                <g>
+                                                    <path style="fill:#FFFFFF;"
+                                                        d="M23.58,51.975c-0.374,0.364-0.798,0.638-1.271,0.82s-0.984,0.273-1.531,0.273 c-0.602,0-1.155-0.109-1.661-0.328s-0.948-0.542-1.326-0.971s-0.675-0.966-0.889-1.613c-0.214-0.647-0.321-1.395-0.321-2.242 s0.107-1.593,0.321-2.235c0.214-0.643,0.511-1.178,0.889-1.606s0.822-0.754,1.333-0.978s1.062-0.335,1.654-0.335 c0.547,0,1.058,0.091,1.531,0.273s0.897,0.456,1.271,0.82l-1.135,1.012c-0.228-0.265-0.48-0.456-0.759-0.574 s-0.567-0.178-0.868-0.178c-0.337,0-0.658,0.063-0.964,0.191s-0.579,0.344-0.82,0.649s-0.431,0.699-0.567,1.183 s-0.21,1.075-0.219,1.777c0.009,0.684,0.08,1.267,0.212,1.75s0.314,0.877,0.547,1.183s0.497,0.528,0.793,0.67 s0.608,0.212,0.937,0.212s0.636-0.06,0.923-0.178s0.549-0.31,0.786-0.574L23.58,51.975z">
+                                                    </path>
+                                                    <path style="fill:#FFFFFF;"
+                                                        d="M31.633,50.238c0,0.364-0.075,0.718-0.226,1.06s-0.362,0.643-0.636,0.902s-0.61,0.467-1.012,0.622 s-0.856,0.232-1.367,0.232c-0.219,0-0.444-0.012-0.677-0.034s-0.467-0.062-0.704-0.116s-0.463-0.13-0.677-0.226 s-0.398-0.212-0.554-0.349l0.287-1.176c0.128,0.073,0.289,0.144,0.485,0.212s0.398,0.132,0.608,0.191s0.419,0.107,0.629,0.144 s0.405,0.055,0.588,0.055c0.556,0,0.982-0.13,1.278-0.39s0.444-0.645,0.444-1.155c0-0.31-0.104-0.574-0.314-0.793 s-0.472-0.417-0.786-0.595s-0.654-0.355-1.019-0.533s-0.706-0.388-1.025-0.629s-0.583-0.526-0.793-0.854s-0.314-0.738-0.314-1.23 c0-0.446,0.082-0.843,0.246-1.189s0.385-0.641,0.663-0.882s0.602-0.426,0.971-0.554s0.759-0.191,1.169-0.191 c0.419,0,0.843,0.039,1.271,0.116s0.774,0.203,1.039,0.376c-0.055,0.118-0.118,0.248-0.191,0.39s-0.142,0.273-0.205,0.396 c-0.063,0.123-0.118,0.226-0.164,0.308s-0.073,0.128-0.082,0.137c-0.055-0.027-0.116-0.063-0.185-0.109s-0.166-0.091-0.294-0.137 s-0.296-0.077-0.506-0.096s-0.479-0.014-0.807,0.014c-0.183,0.019-0.355,0.07-0.52,0.157s-0.31,0.193-0.438,0.321 s-0.228,0.271-0.301,0.431s-0.109,0.313-0.109,0.458c0,0.364,0.104,0.658,0.314,0.882s0.47,0.419,0.779,0.588 s0.647,0.333,1.012,0.492s0.704,0.354,1.019,0.581s0.576,0.513,0.786,0.854S31.633,49.7,31.633,50.238z">
+                                                    </path>
+                                                    <path style="fill:#FFFFFF;"
+                                                        d="M39.043,50.238c0,0.364-0.075,0.718-0.226,1.06s-0.362,0.643-0.636,0.902s-0.61,0.467-1.012,0.622 s-0.856,0.232-1.367,0.232c-0.219,0-0.444-0.012-0.677-0.034s-0.467-0.062-0.704-0.116s-0.463-0.13-0.677-0.226 s-0.398-0.212-0.554-0.349l0.287-1.176c0.128,0.073,0.289,0.144,0.485,0.212s0.398,0.132,0.608,0.191s0.419,0.107,0.629,0.144 s0.405,0.055,0.588,0.055c0.556,0,0.982-0.13,1.278-0.39s0.444-0.645,0.444-1.155c0-0.31-0.104-0.574-0.314-0.793 s-0.472-0.417-0.786-0.595s-0.654-0.355-1.019-0.533s-0.706-0.388-1.025-0.629s-0.583-0.526-0.793-0.854s-0.314-0.738-0.314-1.23 c0-0.446,0.082-0.843,0.246-1.189s0.385-0.641,0.663-0.882s0.602-0.426,0.971-0.554s0.759-0.191,1.169-0.191 c0.419,0,0.843,0.039,1.271,0.116s0.774,0.203,1.039,0.376c-0.055,0.118-0.118,0.248-0.191,0.39s-0.142,0.273-0.205,0.396 s-0.118,0.226-0.164,0.308s-0.073,0.128-0.082,0.137c-0.055-0.027-0.116-0.063-0.185-0.109s-0.166-0.091-0.294-0.137 s-0.296-0.077-0.506-0.096s-0.479-0.014-0.807,0.014c-0.183,0.019-0.355,0.07-0.52,0.157s-0.31,0.193-0.438,0.321 s-0.228,0.271-0.301,0.431s-0.109,0.313-0.109,0.458c0,0.364,0.104,0.658,0.314,0.882s0.47,0.419,0.779,0.588 s0.647,0.333,1.012,0.492s0.704,0.354,1.019,0.581s0.576,0.513,0.786,0.854S39.043,49.7,39.043,50.238z">
+                                                    </path>
+                                                </g>
+                                                <g>
+                                                    <path style="fill:#0096E6;"
+                                                        d="M19.5,19v-4c0-0.551,0.448-1,1-1c0.553,0,1-0.448,1-1s-0.447-1-1-1c-1.654,0-3,1.346-3,3v4 c0,1.103-0.897,2-2,2c-0.553,0-1,0.448-1,1s0.447,1,1,1c1.103,0,2,0.897,2,2v4c0,1.654,1.346,3,3,3c0.553,0,1-0.448,1-1 s-0.447-1-1-1c-0.552,0-1-0.449-1-1v-4c0-1.2-0.542-2.266-1.382-3C18.958,21.266,19.5,20.2,19.5,19z">
+                                                    </path>
+                                                    <path style="fill:#0096E6;"
+                                                        d="M39.5,21c-1.103,0-2-0.897-2-2v-4c0-1.654-1.346-3-3-3c-0.553,0-1,0.448-1,1s0.447,1,1,1 c0.552,0,1,0.449,1,1v4c0,1.2,0.542,2.266,1.382,3c-0.84,0.734-1.382,1.8-1.382,3v4c0,0.551-0.448,1-1,1c-0.553,0-1,0.448-1,1 s0.447,1,1,1c1.654,0,3-1.346,3-3v-4c0-1.103,0.897-2,2-2c0.553,0,1-0.448,1-1S40.053,21,39.5,21z">
+                                                    </path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+
+                                <div
+                                    class="content-of-editor d-flex align-items-start justify-content-start h-100 flex-column">
+                                    <!-- Options layout -->
+                                    <div
+                                        class="d-flex bg-transparent justify-content-start flex-row align-items-center">
+                                        <h2 class="m-2"><svg height="64px" width="64px"
+                                                local="https://www.svgrepo.com/svg/21671/css" version="1.1" id="Capa_1"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 56 56"
+                                                xml:space="preserve" fill="#000000">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round"></g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <g>
+                                                        <path style="fill:#E9E9E0;"
+                                                            d="M36.985,0H7.963C7.155,0,6.5,0.655,6.5,1.926V55c0,0.345,0.655,1,1.463,1h40.074 c0.808,0,1.463-0.655,1.463-1V12.978c0-0.696-0.093-0.92-0.257-1.085L37.607,0.257C37.442,0.093,37.218,0,36.985,0z">
+                                                        </path>
+                                                        <polygon style="fill:#D9D7CA;"
+                                                            points="37.5,0.151 37.5,12 49.349,12 "></polygon>
+                                                        <path style="fill:#0096E6;"
+                                                            d="M48.037,56H7.963C7.155,56,6.5,55.345,6.5,54.537V39h43v15.537C49.5,55.345,48.845,56,48.037,56z">
+                                                        </path>
+                                                        <g>
+                                                            <path style="fill:#FFFFFF;"
+                                                                d="M23.58,51.975c-0.374,0.364-0.798,0.638-1.271,0.82s-0.984,0.273-1.531,0.273 c-0.602,0-1.155-0.109-1.661-0.328s-0.948-0.542-1.326-0.971s-0.675-0.966-0.889-1.613c-0.214-0.647-0.321-1.395-0.321-2.242 s0.107-1.593,0.321-2.235c0.214-0.643,0.511-1.178,0.889-1.606s0.822-0.754,1.333-0.978s1.062-0.335,1.654-0.335 c0.547,0,1.058,0.091,1.531,0.273s0.897,0.456,1.271,0.82l-1.135,1.012c-0.228-0.265-0.48-0.456-0.759-0.574 s-0.567-0.178-0.868-0.178c-0.337,0-0.658,0.063-0.964,0.191s-0.579,0.344-0.82,0.649s-0.431,0.699-0.567,1.183 s-0.21,1.075-0.219,1.777c0.009,0.684,0.08,1.267,0.212,1.75s0.314,0.877,0.547,1.183s0.497,0.528,0.793,0.67 s0.608,0.212,0.937,0.212s0.636-0.06,0.923-0.178s0.549-0.31,0.786-0.574L23.58,51.975z">
+                                                            </path>
+                                                            <path style="fill:#FFFFFF;"
+                                                                d="M31.633,50.238c0,0.364-0.075,0.718-0.226,1.06s-0.362,0.643-0.636,0.902s-0.61,0.467-1.012,0.622 s-0.856,0.232-1.367,0.232c-0.219,0-0.444-0.012-0.677-0.034s-0.467-0.062-0.704-0.116s-0.463-0.13-0.677-0.226 s-0.398-0.212-0.554-0.349l0.287-1.176c0.128,0.073,0.289,0.144,0.485,0.212s0.398,0.132,0.608,0.191s0.419,0.107,0.629,0.144 s0.405,0.055,0.588,0.055c0.556,0,0.982-0.13,1.278-0.39s0.444-0.645,0.444-1.155c0-0.31-0.104-0.574-0.314-0.793 s-0.472-0.417-0.786-0.595s-0.654-0.355-1.019-0.533s-0.706-0.388-1.025-0.629s-0.583-0.526-0.793-0.854s-0.314-0.738-0.314-1.23 c0-0.446,0.082-0.843,0.246-1.189s0.385-0.641,0.663-0.882s0.602-0.426,0.971-0.554s0.759-0.191,1.169-0.191 c0.419,0,0.843,0.039,1.271,0.116s0.774,0.203,1.039,0.376c-0.055,0.118-0.118,0.248-0.191,0.39s-0.142,0.273-0.205,0.396 c-0.063,0.123-0.118,0.226-0.164,0.308s-0.073,0.128-0.082,0.137c-0.055-0.027-0.116-0.063-0.185-0.109s-0.166-0.091-0.294-0.137 s-0.296-0.077-0.506-0.096s-0.479-0.014-0.807,0.014c-0.183,0.019-0.355,0.07-0.52,0.157s-0.31,0.193-0.438,0.321 s-0.228,0.271-0.301,0.431s-0.109,0.313-0.109,0.458c0,0.364,0.104,0.658,0.314,0.882s0.47,0.419,0.779,0.588 s0.647,0.333,1.012,0.492s0.704,0.354,1.019,0.581s0.576,0.513,0.786,0.854S31.633,49.7,31.633,50.238z">
+                                                            </path>
+                                                            <path style="fill:#FFFFFF;"
+                                                                d="M39.043,50.238c0,0.364-0.075,0.718-0.226,1.06s-0.362,0.643-0.636,0.902s-0.61,0.467-1.012,0.622 s-0.856,0.232-1.367,0.232c-0.219,0-0.444-0.012-0.677-0.034s-0.467-0.062-0.704-0.116s-0.463-0.13-0.677-0.226 s-0.398-0.212-0.554-0.349l0.287-1.176c0.128,0.073,0.289,0.144,0.485,0.212s0.398,0.132,0.608,0.191s0.419,0.107,0.629,0.144 s0.405,0.055,0.588,0.055c0.556,0,0.982-0.13,1.278-0.39s0.444-0.645,0.444-1.155c0-0.31-0.104-0.574-0.314-0.793 s-0.472-0.417-0.786-0.595s-0.654-0.355-1.019-0.533s-0.706-0.388-1.025-0.629s-0.583-0.526-0.793-0.854s-0.314-0.738-0.314-1.23 c0-0.446,0.082-0.843,0.246-1.189s0.385-0.641,0.663-0.882s0.602-0.426,0.971-0.554s0.759-0.191,1.169-0.191 c0.419,0,0.843,0.039,1.271,0.116s0.774,0.203,1.039,0.376c-0.055,0.118-0.118,0.248-0.191,0.39s-0.142,0.273-0.205,0.396 s-0.118,0.226-0.164,0.308s-0.073,0.128-0.082,0.137c-0.055-0.027-0.116-0.063-0.185-0.109s-0.166-0.091-0.294-0.137 s-0.296-0.077-0.506-0.096s-0.479-0.014-0.807,0.014c-0.183,0.019-0.355,0.07-0.52,0.157s-0.31,0.193-0.438,0.321 s-0.228,0.271-0.301,0.431s-0.109,0.313-0.109,0.458c0,0.364,0.104,0.658,0.314,0.882s0.47,0.419,0.779,0.588 s0.647,0.333,1.012,0.492s0.704,0.354,1.019,0.581s0.576,0.513,0.786,0.854S39.043,49.7,39.043,50.238z">
+                                                            </path>
+                                                        </g>
+                                                        <g>
+                                                            <path style="fill:#0096E6;"
+                                                                d="M19.5,19v-4c0-0.551,0.448-1,1-1c0.553,0,1-0.448,1-1s-0.447-1-1-1c-1.654,0-3,1.346-3,3v4 c0,1.103-0.897,2-2,2c-0.553,0-1,0.448-1,1s0.447,1,1,1c1.103,0,2,0.897,2,2v4c0,1.654,1.346,3,3,3c0.553,0,1-0.448,1-1 s-0.447-1-1-1c-0.552,0-1-0.449-1-1v-4c0-1.2-0.542-2.266-1.382-3C18.958,21.266,19.5,20.2,19.5,19z">
+                                                            </path>
+                                                            <path style="fill:#0096E6;"
+                                                                d="M39.5,21c-1.103,0-2-0.897-2-2v-4c0-1.654-1.346-3-3-3c-0.553,0-1,0.448-1,1s0.447,1,1,1 c0.552,0,1,0.449,1,1v4c0,1.2,0.542,2.266,1.382,3c-0.84,0.734-1.382,1.8-1.382,3v4c0,0.551-0.448,1-1,1c-0.553,0-1,0.448-1,1 s0.447,1,1,1c1.654,0,3-1.346,3-3v-4c0-1.103,0.897-2,2-2c0.553,0,1-0.448,1-1S40.053,21,39.5,21z">
+                                                            </path>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg></h2>
+                                        <div
+                                            class="d-flex flex-column justify-content-start align-items-start optionsWidthCopy">
+                                            <span title="Copy">
+                                                <svg xmlns="http://www.w3.org/2000/svg" onclick="getText('css-editor')"
+                                                    width="16" height="16" fill="currentColor"
+                                                    local="https://icons.getbootstrap.com/icons/copy/"
+                                                    class="bi bi-copy cursor-pointer" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                                                </svg>
+                                            </span>
+                                            <input type="range" title="Change width" for="css" color="bg-primary"
+                                                class="w-100 slider-width cursor-pointer mb-1 mt-1" min="5" max="100"
+                                                value="100">
+                                        </div>
+                                    </div>
+                                    <!-- Options layout -->
+
+                                    <!-- style="max-height: 500px;" -->
+                                    <div class="overflow-auto shadow h-100 w-100 scrollbar-none">
+                                        <div id="css-editor"
+                                            class="editor border-transparent bg-dark border-5 rounded scrollbar-none overflow-y-auto scrollbar-thin ms-1 me-1">
+                                        </div>
+                                    </div>
+                                    <!-- ** -->
+                                </div>
+                            </section>
+
+                            <!-- ** -->
+                            <section id="html" class="editor-section p-1 transitionAll shadow-strong rounded">
+                                <div
+                                    class="content-of-editor-min rounded d-none w-100 h-100 align-items-center justify-content-center">
+                                    <svg height="64px" width="64px" class="img-fluid p-1"
+                                        local="https://www.svgrepo.com/svg/7866/html" version="1.1" id="Capa_1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        viewBox="0 0 56 56" xml:space="preserve" fill="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <g>
+                                                <path style="fill:#E9E9E0;"
+                                                    d="M36.985,0H7.963C7.155,0,6.5,0.655,6.5,1.926V55c0,0.345,0.655,1,1.463,1h40.074 c0.808,0,1.463-0.655,1.463-1V12.978c0-0.696-0.093-0.92-0.257-1.085L37.607,0.257C37.442,0.093,37.218,0,36.985,0z">
+                                                </path>
+                                                <polygon style="fill:#D9D7CA;" points="37.5,0.151 37.5,12 49.349,12 ">
+                                                </polygon>
+                                                <path style="fill:#EC6630;"
+                                                    d="M48.037,56H7.963C7.155,56,6.5,55.345,6.5,54.537V39h43v15.537C49.5,55.345,48.845,56,48.037,56z">
+                                                </path>
+                                                <g>
+                                                    <path style="fill:#FFFFFF;"
+                                                        d="M17.455,42.924V53h-1.641v-4.539h-4.361V53H9.785V42.924h1.668v4.416h4.361v-4.416H17.455z">
+                                                    </path>
+                                                    <path style="fill:#FFFFFF;"
+                                                        d="M27.107,42.924v1.121H24.1V53h-1.654v-8.955h-3.008v-1.121H27.107z">
+                                                    </path>
+                                                    <path style="fill:#FFFFFF;"
+                                                        d="M36.705,42.924h1.668V53h-1.668v-6.932l-2.256,5.605H33l-2.27-5.605V53h-1.668V42.924h1.668 l2.994,6.891L36.705,42.924z">
+                                                    </path>
+                                                    <path style="fill:#FFFFFF;"
+                                                        d="M42.57,42.924v8.832h4.635V53h-6.303V42.924H42.57z">
+                                                    </path>
+                                                </g>
+                                                <g>
+                                                    <path style="fill:#EC6630;"
+                                                        d="M23.207,16.293c-0.391-0.391-1.023-0.391-1.414,0l-6,6c-0.391,0.391-0.391,1.023,0,1.414l6,6 C21.988,29.902,22.244,30,22.5,30s0.512-0.098,0.707-0.293c0.391-0.391,0.391-1.023,0-1.414L17.914,23l5.293-5.293 C23.598,17.316,23.598,16.684,23.207,16.293z">
+                                                    </path>
+                                                    <path style="fill:#EC6630;"
+                                                        d="M41.207,22.293l-6-6c-0.391-0.391-1.023-0.391-1.414,0s-0.391,1.023,0,1.414L39.086,23 l-5.293,5.293c-0.391,0.391-0.391,1.023,0,1.414C33.988,29.902,34.244,30,34.5,30s0.512-0.098,0.707-0.293l6-6 C41.598,23.316,41.598,22.684,41.207,22.293z">
+                                                    </path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+
+                                <div
+                                    class="content-of-editor d-flex align-items-start justify-content-start h-100 flex-column">
+                                    <!-- Options layout -->
+                                    <div
+                                        class="d-flex bg-transparent justify-content-start flex-row align-items-center">
+                                        <h2 class="m-2"><svg height="64px" width="64px"
+                                                local="https://www.svgrepo.com/svg/7866/html" version="1.1" id="Capa_1"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 56 56"
+                                                xml:space="preserve" fill="#000000">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round"></g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <g>
+                                                        <path style="fill:#E9E9E0;"
+                                                            d="M36.985,0H7.963C7.155,0,6.5,0.655,6.5,1.926V55c0,0.345,0.655,1,1.463,1h40.074 c0.808,0,1.463-0.655,1.463-1V12.978c0-0.696-0.093-0.92-0.257-1.085L37.607,0.257C37.442,0.093,37.218,0,36.985,0z">
+                                                        </path>
+                                                        <polygon style="fill:#D9D7CA;"
+                                                            points="37.5,0.151 37.5,12 49.349,12 "></polygon>
+                                                        <path style="fill:#EC6630;"
+                                                            d="M48.037,56H7.963C7.155,56,6.5,55.345,6.5,54.537V39h43v15.537C49.5,55.345,48.845,56,48.037,56z">
+                                                        </path>
+                                                        <g>
+                                                            <path style="fill:#FFFFFF;"
+                                                                d="M17.455,42.924V53h-1.641v-4.539h-4.361V53H9.785V42.924h1.668v4.416h4.361v-4.416H17.455z">
+                                                            </path>
+                                                            <path style="fill:#FFFFFF;"
+                                                                d="M27.107,42.924v1.121H24.1V53h-1.654v-8.955h-3.008v-1.121H27.107z">
+                                                            </path>
+                                                            <path style="fill:#FFFFFF;"
+                                                                d="M36.705,42.924h1.668V53h-1.668v-6.932l-2.256,5.605H33l-2.27-5.605V53h-1.668V42.924h1.668 l2.994,6.891L36.705,42.924z">
+                                                            </path>
+                                                            <path style="fill:#FFFFFF;"
+                                                                d="M42.57,42.924v8.832h4.635V53h-6.303V42.924H42.57z">
+                                                            </path>
+                                                        </g>
+                                                        <g>
+                                                            <path style="fill:#EC6630;"
+                                                                d="M23.207,16.293c-0.391-0.391-1.023-0.391-1.414,0l-6,6c-0.391,0.391-0.391,1.023,0,1.414l6,6 C21.988,29.902,22.244,30,22.5,30s0.512-0.098,0.707-0.293c0.391-0.391,0.391-1.023,0-1.414L17.914,23l5.293-5.293 C23.598,17.316,23.598,16.684,23.207,16.293z">
+                                                            </path>
+                                                            <path style="fill:#EC6630;"
+                                                                d="M41.207,22.293l-6-6c-0.391-0.391-1.023-0.391-1.414,0s-0.391,1.023,0,1.414L39.086,23 l-5.293,5.293c-0.391,0.391-0.391,1.023,0,1.414C33.988,29.902,34.244,30,34.5,30s0.512-0.098,0.707-0.293l6-6 C41.598,23.316,41.598,22.684,41.207,22.293z">
+                                                            </path>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg></h2>
+                                        <div
+                                            class="d-flex flex-column justify-content-start align-items-start optionsWidthCopy">
+                                            <span title="Copy">
+                                                <svg xmlns="http://www.w3.org/2000/svg" onclick="getText('html-editor')"
+                                                    width="16" height="16" fill="currentColor"
+                                                    local="https://icons.getbootstrap.com/icons/copy/"
+                                                    class="bi bi-copy cursor-pointer" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                                                </svg>
+                                            </span>
+                                            <input type="range" title="Change width" for="html" color="bg-danger"
+                                                class="w-100 slider-width cursor-pointer mb-1 mt-1" min="5" max="100"
+                                                value="100">
+                                        </div>
+                                    </div>
+                                    <!-- Options layout -->
+
+                                    <!-- style="max-height: 500px;" -->
+                                    <div class="overflow-auto shadow h-100 w-100 scrollbar-none">
+                                        <div id="html-editor"
+                                            class="editor border-transparent bg-dark border-5 rounded scrollbar-thin overflow-y-auto scrollbar-none ms-1 me-1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
                         <!-- ** -->
                     </div>
-
                 </div>
-                <iframe id="iframeA"
-                    class="w-100 h-50 containter-fluid position-fixed start-0 top-50 transitionAll"></iframe>
-                <iframe id="iframeB"
-                    class="w-100 h-50 containter-fluid position-fixed start-0 top-50 transitionAll"></iframe>
+
+                <div layout-position="vertical"
+                    class="position-fixed end-0 transitionAll padding-sidebar vw-100 vh-50 bottom-0 z-1"
+                    id="iframes-div">
+                    <div class="d-flex shadow-strong bg-body w-100 flex-row gap-2 pt-3 pe-3 pb-3 border-top border-bottom border-2 justify-content-center align-items-center"
+                        id="divSliderOptions">
+                        <a href="#" title="Hide Toolbar" class="nav-link d-flex rounded-0" data-bs-toggle="tooltip"
+                            id="togglePadding" data-bs-placement="right" aria-label="Customers"
+                            data-bs-original-title="Customers">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-arrow-bar-left"
+                                local="https://icons.getbootstrap.com/icons/arrow-bar-left/" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5" />
+                            </svg>
+                        </a>
+                        <input type="range" title="Change Dimension" class="cursor-pointer" id="vh-slider-iframe"
+                            orient="" min="0" max="100" value="50">
+
+                        <a href="#" title="Change Layout" class="nav-link d-flex rounded-0" data-bs-toggle="tooltip"
+                            id="toggleLayout" data-bs-placement="right" aria-label="Customers"
+                            data-bs-original-title="Customers">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-layout-sidebar"
+                                local="https://icons.getbootstrap.com/icons/layout-sidebar/" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm5-1v12h9a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zM4 2H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h2z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <iframe id="iframeA" class="w-100 h-100"></iframe>
+                    <iframe id="iframeB" class="w-100 h-100"></iframe>
+                </div>
             </article>
         </section>
     </main>
@@ -547,10 +1422,44 @@
     <script src="https://cdn.jsdelivr.net/npm/js-beautify@1.14.9/js/lib/beautify-html.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-beautify@1.14.9/js/lib/beautify-css.js"></script>
 
+    <!-- Highlight.js Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+
+    <!-- Common Language Modules -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/ruby.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/rust.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/glsl.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/markdown.min.js"></script>
+
+    <!-- MarkDown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Optional: Sanitize HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.3/dist/purify.min.js"></script>
+
+    <!-- Zip -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
     <script src="app.js" type="module"></script>
+
+    <!-- Change image previre cover -->
     <script>
         const fileInput = document.getElementById('fileInput');
         const imagePreview = document.getElementById('imagePreview');
@@ -565,6 +1474,154 @@
                 reader.readAsDataURL(file);
             }
         });
+    </script>
+
+    <!-- Get Authenticated user -->
+    <script>
+        //Beginning request
+        function showLoadingPopup(message = `<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>`) {
+            const popup = document.createElement("div");
+            popup.innerHTML = message;
+            popup.id = "loading-popup";
+            popup.style.position = "fixed";
+            popup.style.top = "20px";
+            popup.style.right = "20px";
+            popup.style.background = "#333";
+            popup.style.color = "#fff";
+            popup.style.padding = "10px 15px";
+            popup.style.borderRadius = "5px";
+            popup.style.boxShadow = "0 2px 6px rgba(0,0,0,0.3)";
+            popup.style.fontSize = "16px";
+            popup.style.zIndex = "9999";
+            popup.style.opacity = "1";
+            popup.style.transition = "opacity 0.3s ease-out";
+            popup.style.pointerEvents = "none";
+            popup.className = 'popup'
+
+            document.querySelectorAll('.popup').forEach(el => el.remove());
+            if (!document.getElementById("loading-popup")) {
+                document.body.appendChild(popup);
+            }
+        }
+        function hideLoadingPopup() {
+            const popup = document.getElementById("loading-popup");
+            if (popup) {
+                popup.style.opacity = "0";
+                setTimeout(() => {
+                    if (popup.parentNode) {
+                        popup.parentNode.removeChild(popup);
+                    }
+                }, 300);
+            }
+        }
+        function showErrorPopup(message = `<div class="spinner-grow text-light" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`) {
+            const popup = document.createElement("div");
+            popup.innerHTML = message;
+            popup.style.position = "fixed";
+            popup.style.top = "20px";
+            popup.style.right = "20px";
+            popup.style.background = "#f44336"; // red background
+            popup.style.color = "#fff";
+            popup.style.padding = "10px 15px";
+            popup.style.borderRadius = "5px";
+            popup.style.boxShadow = "0 2px 6px rgba(0,0,0,0.3)";
+            popup.style.fontSize = "16px";
+            popup.style.zIndex = "9999";
+            popup.style.opacity = "1";
+            popup.style.transition = "opacity 1s ease-out";
+            popup.style.pointerEvents = "none";
+            popup.className = 'popup'
+
+            document.querySelectorAll('.popup').forEach(el => el.remove());
+            document.body.appendChild(popup);
+
+            // Fade out after 1.5 seconds
+            setTimeout(() => {
+                popup.style.opacity = "0";
+                setTimeout(() => {
+                    if (popup.parentNode) {
+                        popup.parentNode.removeChild(popup);
+                    }
+                }, 1000);
+            }, 1500);
+        }
+        function showSuccessPopup(message = `<div class="spinner-grow text-light" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`) {
+            const popup = document.createElement("div");
+            popup.innerHTML = message;
+            popup.style.position = "fixed";
+            popup.style.top = "20px";
+            popup.style.right = "20px";
+            popup.style.background = "#4caf50"; // green background
+            popup.style.color = "#fff";
+            popup.style.padding = "10px 15px";
+            popup.style.borderRadius = "5px";
+            popup.style.boxShadow = "0 2px 6px rgba(0,0,0,0.3)";
+            popup.style.fontSize = "16px";
+            popup.style.zIndex = "9999";
+            popup.style.opacity = "1";
+            popup.style.transition = "opacity 1s ease-out";
+            popup.style.pointerEvents = "none";
+            popup.className = 'popup'
+
+
+            document.querySelectorAll('.popup').forEach(el => el.remove());
+            document.body.appendChild(popup);
+
+            // Fade out after 1.5 seconds
+            setTimeout(() => {
+                popup.style.opacity = "0";
+                setTimeout(() => {
+                    if (popup.parentNode) {
+                        popup.parentNode.removeChild(popup);
+                    }
+                }, 1000);
+            }, 1500);
+        }
+
+        (async function () {
+            const apiBase = 'http://127.0.0.1:8000';
+            const serverStorage = 'http://127.0.0.1:8000/storage/'
+
+            async function checkAuth() {
+                try {
+                    const res = await fetch(`${apiBase}/api/user/my`, {
+                        credentials: 'include',
+                        headers: { 'Accept': 'application/json', }
+                    });
+                    if (!res.ok) throw new Error('Not authenticated');
+                    const { user } = await res.json();
+                    return user;
+                } catch {
+                    return null;
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', async () => {
+                showLoadingPopup()
+                const user = await checkAuth();
+                const isLoggedIn = !!user;
+                const imgPerfil = document.getElementById('imgRedirectUserToProfile')
+
+                if (isLoggedIn) {
+                    imgPerfil.classList.remove('d-none')
+                    imgPerfil.classList.add('d-flex')
+                    imgPerfil.src = `${serverStorage}${user.photo}`
+
+                    imgPerfil.addEventListener('click', function () {
+                        window.location.href = 'profile.html';
+                    })
+                }
+                else {
+                    imgPerfil.classList.remove('d-flex')
+                    imgPerfil.classList.add('d-none')
+                }
+                hideLoadingPopup()
+            });
+        })();
     </script>
 </body>
 
