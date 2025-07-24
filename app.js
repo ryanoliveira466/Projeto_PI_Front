@@ -1327,7 +1327,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   // Profile
   if (document.getElementById('profileForm')) {
-  
+
     //Effects
     if (document.getElementById('profileForm')) {
 
@@ -1602,8 +1602,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
       }
 
-
-
       //Display projects
       function displayProjects() {
         if (document.getElementById('projectsProfile')) {
@@ -1862,6 +1860,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             // Description overlay toggle logic
             const openDescriptionBtn = document.getElementById(`openDescription-${userSlug}-${projectSlug}`);
             const closeDescriptionBtn = document.getElementById(`closeDescription-${userSlug}-${projectSlug}`);
+            const deletePostBtn = document.getElementById(`delete-${userSlug}-${projectSlug}`)
             const expandProjectBtn = document.getElementById(`expandProject-${userSlug}-${projectSlug}`);
             const minimizeProjectBtn = document.getElementById(`minimizeProject-${userSlug}-${projectSlug}`)
             const markdownOverlay = document.getElementById(`markdownOverlay-${userSlug}-${projectSlug}`);
@@ -1893,6 +1892,66 @@ document.addEventListener('DOMContentLoaded', async function () {
                 }
               });
             });
+
+            deletePostBtn.addEventListener('click', function () {
+              const confirmDeletePostBtn = document.getElementById('confirmDeletePost');
+              const cancelDeletePostBtn = document.getElementById('cancelDeletePost')
+              // Animate and remove the post
+              function animateAndRemovePost(post) {
+                const postElement = post
+                if (!postElement) return;
+
+                // Animate using GSAP
+                gsap.to(postElement, {
+                  duration: 0.5,
+                  opacity: 0,
+                  y: -20,
+                  ease: 'power2.out',
+                  onComplete: () => {
+                    postElement.remove(); // Remove from DOM after animation
+                  }
+                });
+              }
+
+              const deleteModalPost = new bootstrap.Modal(document.getElementById('deleteModalPost'));
+              deleteModalPost.show();
+
+
+              confirmDeletePostBtn.addEventListener('click', async function () {
+                showLoadingPopup()
+                try {
+                  await fetch('http://127.0.0.1:8000/sanctum/csrf-cookie', {
+                    credentials: 'include'
+                  });
+                  const csrfToken = decodeURIComponent(getCookie('XSRF-TOKEN'));
+
+                  const response = await fetch(`${apiUrl}/post/destroy/${projectSlug}`, {
+                    method: 'DELETE',
+                    credentials: 'include',        // ← send the session cookie
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'X-XSRF-TOKEN': csrfToken }
+                  });
+
+                  const data = await response.json();
+
+                  if (response.ok) {
+                    document.getElementById('message').innerText = data.message;
+                    animateAndRemovePost(mainDiv)
+                    cancelDeletePostBtn.click()
+                    showSuccessPopup()
+                  } else {
+                    document.getElementById('message').innerText = `${data.message}: ${data.error}` || 'An unknown error occurred';
+                    showErrorPopup()
+                  }
+                } catch (error) {
+                  document.getElementById('message').innerText = `${data.message}: ${data.error}` || 'An unknown error occurred';
+                  showErrorPopup()
+                }
+                finally {
+                  hideLoadingPopup()
+                }
+              });
+
+            })
 
             expandProjectBtn.addEventListener('click', function () {
               iframeFullscreen.classList.remove('position-absolute')
@@ -2042,14 +2101,7 @@ document.addEventListener('DOMContentLoaded', async function () {
               tagContainer.innerHTML = tagContainer.innerHTML + template
             })
 
-
-
-
-
           }
-
-
-
 
         }
 
