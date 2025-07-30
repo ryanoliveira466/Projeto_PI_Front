@@ -8,7 +8,7 @@ Link Artigo (Apenas Visualização):
 > https://pt.overleaf.com/read/nscnkttppbcy#0bf01d
 
 ---
-<br>
+
 ---
 
 # Tutorial projeto
@@ -69,7 +69,6 @@ CTRL + C
 ```
 Fecha o server.
 
-<br>
 ---
 
 ---
