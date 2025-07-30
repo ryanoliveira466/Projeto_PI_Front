@@ -1,3 +1,5 @@
+---
+
 # temp_NomeProjeto
 
 ## Integrantes: Ryan Oliveira, Raike Vargas
@@ -5,6 +7,9 @@
 Link Artigo (Apenas Visualização):
 > https://pt.overleaf.com/read/nscnkttppbcy#0bf01d
 
+---
+<br>
+---
 
 # Tutorial projeto
 ---
@@ -64,3 +69,57 @@ CTRL + C
 ```
 Fecha o server.
 
+<br>
+---
+
+---
+# Apresentação
+- Criar perfis antes para mostrar sistema de Follow, Following, Like, View
+---
+
+# Register
+- Registrar usuário
+- Mosrar no Mailtrap verificação de email
+
+# Login
+- Logar usuário
+
+# Mostrar a home
+- Apresentar pesquisa de usuários
+- Apresentar projetos
+- Apresentar Pre Visualização
+
+# Create
+- Layout
+- Mudar o HTML ou CSS
+- Apresentar a toolbar
+
+# Abrir perfil de usuário a partir da home
+- Abrir  perfil
+- Seguir
+- Mostrar projetos
+
+# Abrir a profile do usuário logado
+#### Apresentar Funções do usuário
+- Create(apenas mostrar que vai para a página de create)
+- Mostrar página do usuário(apenas mostrar que vai para a página pública do usuário)
+- Followers
+- Following
+
+#### Apresentar projetos do usuário
+- Editar um projeto(Mostrar que foi editado)
+- Excluir(Mostrar que foi excluído)
+
+#### Editar info do usuário
+- Mudar TODOS os elementos do usuário(Foto, nome, email)
+- Apresentar o MailTrap mostrando que chegou um email de verificação
+- Mudar senha do usuário
+- Deslogar e logar usuário
+
+- Deslogar usuário novamente
+- Ir em login, esquecer senha, colocar o email
+- Mostar no Mailtrap o email de senha e fazer o projeto
+- Logar o usuário novamente depois do processo
+- Excluir usuário
+
+---
