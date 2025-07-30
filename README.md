@@ -71,8 +71,8 @@ Fecha o server.
 
 ### 4 - Configurações básicas
 * Nos arquivos do BackEnd acessando `storage/app/public`, crie uma pasta chamada `photos`. Adicione uma imagem padrão dentro dessa pasta para usuários novos chamada `default-user.jpg`
-* Configurar uma conta no MailTrap, para verificação de email e reset de senha *LER env.example*
-* Temos outras configurações importantes que estão na .envExample também
+* Configurar uma conta no MailTrap, para verificação de email e reset de senha **LER env.example**
+* Temos outras configurações importantes que estão na **.envExample** também
 
 ---
 
