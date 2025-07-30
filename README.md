@@ -5,7 +5,7 @@
 ## Integrantes: Ryan Oliveira, Raike Vargas
 
 Link Artigo (Apenas Visualização):
-> [https://pt.overleaf.com/read/nscnkttppbcy#0bf01d](https://www.overleaf.com/project/6842fb0dc0036bd7b447a232)
+> https://www.overleaf.com/project/6842fb0dc0036bd7b447a232
 
 ---
 
